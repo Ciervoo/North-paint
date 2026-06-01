@@ -21,12 +21,12 @@ const IMG = {
   PRIMER_5K: "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",
   PRIMER_4K: "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg",
   GLADIATOR: "/gladiator.jpg",
+  PISTOLA: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
   S20:  "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
   S21:  "https://www.icriberica.com/wp-content/uploads/2024/10/S21.jpg",
   S35:  "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
   S61:  "https://www.icriberica.com/wp-content/uploads/2024/09/SC4-ROYAL-SOFT-PUTTY-Padella.jpg",
   S97:  "https://www.icriberica.com/wp-content/uploads/2023/12/Sin-titulo-1.jpg",
-  PISTOLA: "https://www.icriberica.com/wp-content/uploads/2024/09/SWIFT-Bulk-Filler-3_5.jpg",
 };
 
 export const productos: Producto[] = [
@@ -251,7 +251,7 @@ export const productos: Producto[] = [
     nombre: "Pistola Aplicadora",
     presentacion: "Unidad",
     precio: 180000,
-    imagen: "https://www.icriberica.com/wp-content/uploads/2024/09/ACE-Super-Lightweight.jpg",
+    imagen: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
     descripcion: "Pistola aplicadora profesional para selladores y productos de textura.",
   },
 

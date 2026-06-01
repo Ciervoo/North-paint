@@ -165,8 +165,7 @@ export default function Catalogo() {
           <img src="/logo.jpg" alt="North Paint" className="h-10 w-auto rounded" />
         </Link>
         <nav className="flex gap-6 text-sm font-semibold">
-          <Link href="/catalogo" className="text-yellow-300">Catálogo</Link>
-          <Link href="/checkout" className="hover:text-yellow-300 transition-colors">Mi pedido</Link>
+          <Link href="/checkout" className="hover:text-yellow-300 transition-colors">🛒 Mi pedido</Link>
         </nav>
       </header>
 
