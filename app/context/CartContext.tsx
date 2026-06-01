@@ -49,7 +49,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const vaciarCarrito = () => setItems([]);
 
   const totalItems = items.reduce((acc, i) => acc + i.cantidad, 0);
-  const totalPrecio = items.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+  // Usa precioPromo si existe, si no el precio normal
+  const totalPrecio = items.reduce((acc, i) => acc + (i.precioPromo ?? i.precio) * i.cantidad, 0);
 
   return (
     <CartContext.Provider

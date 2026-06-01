@@ -65,7 +65,8 @@ export default function CartDrawer() {
                   <p className="font-semibold text-sm text-gray-800 leading-tight truncate">{item.nombre}</p>
                   <p className="text-xs text-gray-400 mt-0.5">{item.presentacion}</p>
                   <p className="font-bold text-sm mt-1" style={{ color: "var(--north-yellow)" }}>
-                    ${(item.precio * item.cantidad).toLocaleString("es-AR")}
+                    ${((item.precioPromo ?? item.precio) * item.cantidad).toLocaleString("es-AR")}
+                    {item.precioPromo && <span className="text-xs text-green-500 ml-1">PROMO</span>}
                   </p>
                 </div>
                 <div className="flex flex-col items-center gap-1">

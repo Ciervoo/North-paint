@@ -33,7 +33,7 @@ export default function Checkout() {
     setEstado("enviando");
 
     const listaProductos = items
-      .map((i) => `• ${i.nombre} (${i.presentacion}) x${i.cantidad} = $${(i.precio * i.cantidad).toLocaleString("es-AR")}`)
+      .map((i) => `• ${i.nombre} (${i.presentacion}) x${i.cantidad} = $${((i.precioPromo ?? i.precio) * i.cantidad).toLocaleString("es-AR")}${i.precioPromo ? " (PROMO)" : ""}`)
       .join("\n");
 
     const templateParams = {
@@ -111,7 +111,7 @@ export default function Checkout() {
                     <p className="text-xs text-gray-400">{item.presentacion} × {item.cantidad}</p>
                   </div>
                   <p className="font-bold text-sm" style={{ color: "var(--north-yellow)" }}>
-                    ${(item.precio * item.cantidad).toLocaleString("es-AR")}
+                    ${((item.precioPromo ?? item.precio) * item.cantidad).toLocaleString("es-AR")}
                   </p>
                 </div>
               ))}
