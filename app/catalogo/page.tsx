@@ -5,14 +5,14 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { productos, categoriasSprint } from "../data/productos";
 import AgregarCarritoBtn from "../components/AgregarCarritoBtn";
 
-const stagger = { show: { transition: { staggerChildren: 0.07 } } };
-const cardAnim = {
+const stagger: Variants = { show: { transition: { staggerChildren: 0.07 } } };
+const cardAnim: Variants = {
   hidden: { opacity: 0, y: 28, scale: 0.96 },
-  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.4, ease: "easeOut" as const } },
 };
 
 function CatalogoContent() {

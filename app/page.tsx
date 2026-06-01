@@ -1,36 +1,36 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import HeroWrapper from "./components/HeroWrapper";
 import PromoSection from "./components/PromoSection";
 import CountUp from "./components/CountUp";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
 };
-const fadeLeft = {
+const fadeLeft: Variants = {
   hidden: { opacity: 0, x: -50 },
-  show:   { opacity: 1, x: 0,  transition: { duration: 0.7, ease: "easeOut" } },
+  show:   { opacity: 1, x: 0,  transition: { duration: 0.7, ease: "easeOut" as const } },
 };
-const fadeRight = {
+const fadeRight: Variants = {
   hidden: { opacity: 0, x: 50 },
-  show:   { opacity: 1, x: 0,  transition: { duration: 0.7, ease: "easeOut" } },
+  show:   { opacity: 1, x: 0,  transition: { duration: 0.7, ease: "easeOut" as const } },
 };
-const stagger = {
+const stagger: Variants = {
   show: { transition: { staggerChildren: 0.12 } },
 };
-const cardVariant = {
+const cardVariant: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.97 },
-  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen overflow-x-hidden" style={{ overflowX: "hidden" }}>
 
-      {/* ── HEADER ─────────────────────────────────────── */}
+      {/* - HEADER - */}
       <header style={{ backgroundColor: "var(--north-blue)" }}
         className="text-white py-3 px-6 flex items-center justify-between shadow-lg sticky top-0 z-30 backdrop-blur">
         <Link href="/" className="flex items-center">
@@ -50,7 +50,7 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* ── HERO ───────────────────────────────────────── */}
+      {/* - HERO - */}
       <section style={{ background: "linear-gradient(160deg, #060e1c 0%, #0f2540 60%, #1a3a62 100%)" }}
         className="relative overflow-hidden px-4 pt-10 pb-12">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-10"
@@ -91,7 +91,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS BAR ──────────────────────────────────── */}
+      {/* - STATS BAR - */}
       <section style={{ background: "linear-gradient(90deg, #f5a623, #e08b0a)" }} className="py-5 px-6">
         <motion.div
           className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
@@ -113,10 +113,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── PROMOS ─────────────────────────────────────── */}
+      {/* - PROMOS - */}
       <PromoSection />
 
-      {/* ── LÍNEAS — showcase ──────────────────────────── */}
+      {/* - LÍNEAS — showcase - */}
       <section style={{ background: "#060e1c" }}>
 
         {/* Sprint */}
@@ -175,7 +175,7 @@ export default function Home() {
 
       </section>
 
-      {/* ── PRODUCTOS DESTACADOS ───────────────────────── */}
+      {/* - PRODUCTOS DESTACADOS - */}
       <section className="py-14 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <motion.div className="text-center mb-8"
@@ -212,11 +212,11 @@ export default function Home() {
                 </Link>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── POR QUÉ ELEGIRNOS ──────────────────────────── */}
+      {/* - POR QUÉ ELEGIRNOS - */}
       <section className="py-14 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <motion.h2 className="text-3xl font-black text-center mb-10" style={{ color: "var(--north-blue)" }}
@@ -247,7 +247,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA FINAL ──────────────────────────────────── */}
+      {/* - CTA FINAL - */}
       <section className="py-16 px-6 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #0f2540 0%, #1e3a5f 50%, #25507a 100%)" }}>
         <div className="absolute inset-0 opacity-5"

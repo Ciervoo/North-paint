@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { promociones } from "../data/productos";
 
-const stagger = { show: { transition: { staggerChildren: 0.1 } } };
-const card = {
+const stagger: Variants = { show: { transition: { staggerChildren: 0.1 } } };
+const card: Variants = {
   hidden: { opacity: 0, y: 35, scale: 0.96 },
-  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export default function PromoSection() {
