@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroWrapper from "./components/HeroWrapper";
 
 export default function Home() {
   return (
@@ -12,16 +13,13 @@ export default function Home() {
         <nav className="flex gap-6 text-sm font-medium">
           <Link href="/catalogo" className="hover:text-yellow-300 transition-colors">Catálogo</Link>
           <Link href="/pedido" className="hover:text-yellow-300 transition-colors">Hacer Pedido</Link>
-          <Link href="/contacto" className="hover:text-yellow-300 transition-colors">Contacto</Link>
         </nav>
       </header>
 
-      {/* Hero */}
-      <section style={{ background: "linear-gradient(135deg, var(--north-blue) 0%, #2d5a8e 100%)" }} className="text-white py-24 px-6 text-center flex-1 flex flex-col items-center justify-center">
-        <h1 className="text-5xl font-extrabold mb-4 tracking-tight">Distribuidora North Paint</h1>
-        <p className="text-xl mb-2 text-blue-200">Pinturas, revestimientos y materiales de construcción</p>
-        <p className="text-lg mb-10 text-blue-300">Pedí online y recibí en tu domicilio</p>
-        <div className="flex gap-4 flex-wrap justify-center">
+      {/* Hero con animación Remotion */}
+      <section style={{ backgroundColor: "#1e3a5f" }} className="px-6 py-8">
+        <HeroWrapper />
+        <div className="flex gap-4 flex-wrap justify-center mt-8">
           <Link
             href="/pedido"
             style={{ backgroundColor: "var(--north-yellow)" }}
@@ -42,8 +40,8 @@ export default function Home() {
       <section className="py-16 px-6 bg-white">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
-            { icon: "🎨", title: "Amplio Catálogo", desc: "Pinturas látex, esmaltes, impermeabilizantes, revestimientos y más." },
-            { icon: "🚚", title: "Entrega a Domicilio", desc: "Llevamos tus materiales directo a la obra o tu casa." },
+            { icon: "🎨", title: "Pinturas Automotrices", desc: "Barnices HS/UHS, primers, masillas, selladores y diluyentes de primera calidad." },
+            { icon: "🚚", title: "Entrega a Domicilio", desc: "Llevamos tus materiales directo a la obra o taller. Zona GBA." },
             { icon: "📦", title: "Pedido Online", desc: "Pedí fácil desde el celular o la computadora, sin filas." },
           ].map((f) => (
             <div key={f.title} className="flex flex-col items-center gap-3 p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -53,6 +51,13 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Datos de contacto */}
+      <section className="py-10 px-6 bg-gray-50 text-center">
+        <p className="text-gray-600 text-sm">📍 Colombres 785, M.J. Haedo, Pcia. de Bs.As.</p>
+        <p className="text-gray-600 text-sm mt-1">📱 WhatsApp: <a href="https://wa.me/5491168592507" className="underline font-medium" style={{ color: "var(--north-blue)" }}>11 6859-2507</a></p>
+        <p className="text-gray-600 text-sm mt-1">📸 Instagram: <a href="https://instagram.com/distribuidora.northpaint" className="underline font-medium" style={{ color: "var(--north-blue)" }}>@distribuidora.northpaint</a></p>
       </section>
 
       {/* Footer */}
