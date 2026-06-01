@@ -192,12 +192,9 @@ export default function Home() {
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #f5a623 0%, transparent 50%), radial-gradient(circle at 80% 50%, #60a5fa 0%, transparent 50%)" }} />
 
-        {/* Latas flotantes decorativas */}
-        <img src="/toro/thinner.jpg" alt=""
-          className="absolute left-4 top-1/2 -translate-y-1/2 h-32 opacity-20 anim-float hidden md:block" />
-        <img src="/toro/desengrasante.jpg" alt=""
-          className="absolute right-4 top-1/2 -translate-y-1/2 h-32 opacity-20 hidden md:block"
-          style={{ animation: "float 3.5s ease-in-out infinite", animationDelay: "0.5s" }} />
+        {/* Círculos decorativos */}
+        <div className="absolute left-8 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full hidden md:block opacity-10 border-4 border-yellow-400" />
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 w-20 h-20 rounded-full hidden md:block opacity-10 border-4 border-blue-300" />
 
         <div className="relative z-10 max-w-lg mx-auto">
           <p className="text-white font-black text-3xl mb-2">¿Listo para pintar?</p>

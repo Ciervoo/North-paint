@@ -3,33 +3,47 @@
 import { Player } from "@remotion/player";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
-// Lata individual que entra volando
-function Lata({ x, y, delay, src, size, rotDir, frame, fps }: {
-  x: number; y: number; delay: number; src: string;
-  size: number; rotDir: number; frame: number; fps: number;
+// Gota de pintura animada
+function PaintDrop({ x, y, size, color, delay, frame, fps }: {
+  x: number; y: number; size: number; color: string;
+  delay: number; frame: number; fps: number;
 }) {
-  const sc = spring({ frame: Math.max(0, frame - delay), fps, config: { damping: 12, stiffness: 70 } });
-  const startY = y > 50 ? 420 : -80;
-  const posY = interpolate(sc, [0, 1], [startY, y]);
-  const rot = interpolate(frame, [delay, delay + 40], [rotDir * 25, 0], { extrapolateRight: "clamp" });
-  const floatY = Math.sin((frame + delay * 7) / 20) * 6;
+  const sc = spring({ frame: Math.max(0, frame - delay), fps, config: { damping: 10, stiffness: 60 } });
+  const floatY = Math.sin((frame + delay * 5) / 22) * 7;
+  const rot = interpolate(frame, [delay, delay + 180], [0, 360], { extrapolateRight: "clamp" });
 
   return (
-    <img
-      src={src}
-      alt=""
-      style={{
-        position: "absolute",
-        left: x,
-        top: posY + floatY,
-        width: size,
-        height: size,
-        objectFit: "contain",
-        transform: `rotate(${rot}deg)`,
-        filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.5))",
-        opacity: sc,
-      }}
-    />
+    <div style={{
+      position: "absolute",
+      left: x, top: y + floatY,
+      width: size, height: size,
+      borderRadius: "60% 40% 50% 50% / 50% 50% 40% 60%",
+      background: color,
+      opacity: sc * 0.85,
+      transform: `scale(${sc}) rotate(${rot}deg)`,
+      filter: "blur(0.5px)",
+      boxShadow: `0 8px 32px ${color}66`,
+    }} />
+  );
+}
+
+// Círculo con borde
+function Ring({ x, y, size, color, delay, frame, fps }: {
+  x: number; y: number; size: number; color: string;
+  delay: number; frame: number; fps: number;
+}) {
+  const sc = spring({ frame: Math.max(0, frame - delay), fps, config: { damping: 14, stiffness: 50 } });
+  const floatY = Math.sin((frame + delay * 8) / 25) * 5;
+  return (
+    <div style={{
+      position: "absolute",
+      left: x, top: y + floatY,
+      width: size, height: size,
+      borderRadius: "50%",
+      border: `3px solid ${color}`,
+      opacity: sc * 0.5,
+      transform: `scale(${sc})`,
+    }} />
   );
 }
 
@@ -37,60 +51,59 @@ function NorthPaintHero() {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const logoSc = spring({ frame, fps, config: { damping: 12, stiffness: 90 } });
-  const titleX = interpolate(frame, [8, 30], [-100, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const titleOp = interpolate(frame, [8, 30], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const subX = interpolate(frame, [22, 44], [100, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const subOp = interpolate(frame, [22, 44], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const lineW = interpolate(frame, [38, 68], [0, 280], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const badgeOp = interpolate(frame, [60, 78], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const badgeY = interpolate(frame, [60, 78], [25, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const rot = interpolate(frame, [0, 200], [0, 20]);
-
-  const latas = [
-    { x: 28, y: 28, delay: 15, src: "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg", size: 90, rotDir: -1 },
-    { x: 740, y: 18, delay: 25, src: "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg", size: 85, rotDir: 1 },
-    { x: 18, y: 210, delay: 32, src: "https://www.icriberica.com/wp-content/uploads/2024/09/H67-5L.jpg", size: 80, rotDir: -1 },
-    { x: 750, y: 200, delay: 20, src: "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png", size: 78, rotDir: 1 },
-    { x: 45, y: 295, delay: 38, src: "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg", size: 68, rotDir: -1 },
-    { x: 760, y: 290, delay: 42, src: "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg", size: 65, rotDir: 1 },
-  ];
+  const logoSc  = spring({ frame, fps, config: { damping: 12, stiffness: 90 } });
+  const titleX  = interpolate(frame, [8,  30], [-100, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const titleOp = interpolate(frame, [8,  30], [0, 1],    { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const subX    = interpolate(frame, [22, 44], [100, 0],  { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const subOp   = interpolate(frame, [22, 44], [0, 1],    { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const lineW   = interpolate(frame, [38, 68], [0, 280],  { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const badgeOp = interpolate(frame, [60, 78], [0, 1],    { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const badgeY  = interpolate(frame, [60, 78], [25, 0],   { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const bgRot   = interpolate(frame, [0, 200], [0, 15]);
 
   return (
     <AbsoluteFill style={{
-      background: "linear-gradient(135deg, #060f1e 0%, #0f2540 45%, #1a3a62 100%)",
+      background: "linear-gradient(155deg, #060e1c 0%, #0f2540 55%, #1a3a62 100%)",
       fontFamily: "Montserrat, Arial Black, sans-serif",
       overflow: "hidden",
     }}>
-      {/* Gradiente radial de fondo */}
+      {/* Fondo con glow */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "radial-gradient(ellipse at 50% 50%, rgba(245,166,35,0.08) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse at 50% 55%, rgba(245,166,35,0.10) 0%, transparent 65%)",
       }} />
 
-      {/* Círculos decorativos */}
+      {/* Anillo decorativo giratorio */}
       <div style={{
-        position: "absolute", width: 560, height: 560, borderRadius: "50%",
-        border: "1px solid rgba(245,166,35,0.12)",
-        top: -220, right: -160, transform: `rotate(${rot}deg)`,
+        position: "absolute", width: 580, height: 580, borderRadius: "50%",
+        border: "1px solid rgba(245,166,35,0.10)",
+        top: -230, right: -170,
+        transform: `rotate(${bgRot}deg)`,
       }} />
       <div style={{
-        position: "absolute", width: 360, height: 360, borderRadius: "50%",
-        border: "1px solid rgba(255,255,255,0.05)",
-        bottom: -140, left: -100,
+        position: "absolute", width: 380, height: 380, borderRadius: "50%",
+        border: "1px solid rgba(255,255,255,0.04)",
+        bottom: -150, left: -110,
       }} />
 
-      {/* Latas volando */}
-      {latas.map((l, i) => (
-        <Lata key={i} {...l} frame={frame} fps={fps} />
-      ))}
+      {/* Gotas de pintura flotantes */}
+      <PaintDrop x={30}  y={25}  size={55} color="#f5a623" delay={10} frame={frame} fps={fps} />
+      <PaintDrop x={790} y={18}  size={48} color="#3b82f6" delay={22} frame={frame} fps={fps} />
+      <PaintDrop x={18}  y={220} size={42} color="#f5a623" delay={35} frame={frame} fps={fps} />
+      <PaintDrop x={800} y={210} size={50} color="#60a5fa" delay={18} frame={frame} fps={fps} />
+      <PaintDrop x={55}  y={310} size={32} color="#fbbf24" delay={42} frame={frame} fps={fps} />
+      <PaintDrop x={810} y={295} size={36} color="#93c5fd" delay={28} frame={frame} fps={fps} />
+
+      {/* Anillos decorativos */}
+      <Ring x={760} y={60}  size={80} color="#f5a623" delay={15} frame={frame} fps={fps} />
+      <Ring x={20}  y={290} size={60} color="#60a5fa" delay={30} frame={frame} fps={fps} />
+      <Ring x={770} y={260} size={50} color="#fbbf24" delay={40} frame={frame} fps={fps} />
 
       {/* Contenido central */}
       <div style={{
         position: "absolute", inset: 0,
         display: "flex", flexDirection: "column",
-        alignItems: "center", justifyContent: "center",
-        zIndex: 10,
+        alignItems: "center", justifyContent: "center", zIndex: 10,
       }}>
         {/* Logo */}
         <div style={{
@@ -98,7 +111,7 @@ function NorthPaintHero() {
           backgroundColor: "white",
           padding: "8px 18px",
           borderRadius: 12,
-          marginBottom: 20,
+          marginBottom: 22,
           boxShadow: "0 0 0 6px rgba(245,166,35,0.2), 0 16px 48px rgba(0,0,0,0.5)",
         }}>
           <img src="/logo.jpg" alt="North Paint"
@@ -135,14 +148,14 @@ function NorthPaintHero() {
         <div style={{ opacity: badgeOp, transform: `translateY(${badgeY}px)`, display: "flex", gap: 10 }}>
           {[
             { label: "🎨 Línea Sprint", gold: true },
-            { label: "🐂 Línea Toro", gold: false },
-            { label: "🚚 Entrega GBA", gold: false },
+            { label: "🐂 Línea Toro",   gold: false },
+            { label: "🚚 Entrega GBA",  gold: false },
           ].map((b) => (
             <div key={b.label} style={{
               padding: "7px 16px", borderRadius: 30, fontSize: 12, fontWeight: 800,
-              backgroundColor: b.gold ? "#f5a623" : "rgba(255,255,255,0.1)",
+              backgroundColor: b.gold ? "#f5a623" : "rgba(255,255,255,0.10)",
               color: "white",
-              border: b.gold ? "none" : "1.5px solid rgba(255,255,255,0.3)",
+              border: b.gold ? "none" : "1.5px solid rgba(255,255,255,0.28)",
             }}>
               {b.label}
             </div>

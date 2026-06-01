@@ -11,277 +11,94 @@ export type Producto = {
   descripcion: string;
 };
 
-// Imágenes
 const IMG = {
-  H59:  "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
-  H62:  "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg",
-  H69:  "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg",
-  H77:  "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png",
-  H67:  "https://www.icriberica.com/wp-content/uploads/2024/09/H67-5L.jpg",
+  H59:       "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
+  H62:       "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg",
+  H69:       "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg",
+  H77:       "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png",
+  H67:       "https://www.icriberica.com/wp-content/uploads/2024/09/H67-5L.jpg",
   PRIMER_5K: "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",
   PRIMER_4K: "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg",
   GLADIATOR: "/gladiator.jpg",
-  PISTOLA: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
-  S20:  "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
-  S21:  "https://www.icriberica.com/wp-content/uploads/2024/10/S21.jpg",
-  S35:  "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
-  S61:  "https://www.icriberica.com/wp-content/uploads/2024/09/SC4-ROYAL-SOFT-PUTTY-Padella.jpg",
-  S97:  "https://www.icriberica.com/wp-content/uploads/2023/12/Sin-titulo-1.jpg",
+  PISTOLA:   "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
+  S20:       "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
+  S35:       "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
+  S61:       "https://www.icriberica.com/wp-content/uploads/2024/09/Elite-small-can-2017.jpg",
+  S97:       "https://www.icriberica.com/wp-content/uploads/2024/09/SWIFT-Bulk-Filler-3_5.jpg",
+  A14:       "https://www.icriberica.com/wp-content/uploads/2024/07/A14-1L.jpg",
 };
 
 export const productos: Producto[] = [
 
   // ══════════════════════════════════════════
-  //  LÍNEA SPRINT — BARNICES (precios de KIT)
+  //  BARNICES — KIT (barniz + catalizador)
   // ══════════════════════════════════════════
-  {
-    id: 1, codigo: "H59", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H59 HS Sprint-Air GT Clear",
-    presentacion: "Kit 1,5 lt (barniz + catalizador)",
-    precio: 85700,
-    imagen: IMG.H59,
-    descripcion: "Barniz alto sólidos, curado rápido 2:1. Kit incluye barniz y catalizador.",
-  },
-  {
-    id: 2, codigo: "H59-7.5", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H59 HS Sprint-Air GT Clear",
-    presentacion: "Kit 7,5 lt (barniz + catalizador)",
-    precio: 406800,
-    imagen: IMG.H59,
-    descripcion: "Barniz HS curado rápido, presentación profesional. Kit incluye catalizador.",
-  },
-  {
-    id: 3, codigo: "H62", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H62 HS Fast Anti-Rayado",
-    presentacion: "Kit 7,5 lt (barniz + catalizador)",
-    precio: 283950, precioPromo: 239000,
-    imagen: IMG.H62,
-    descripcion: "Barniz HS de secado rápido con resistencia a rayaduras. Kit incluye catalizador.",
-  },
-  {
-    id: 4, codigo: "H69-1.5", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H69 UHS Vantix Plus",
-    presentacion: "Kit 1,5 lt (barniz + catalizador)",
-    precio: 106150,
-    imagen: IMG.H69,
-    descripcion: "Ultra alto sólidos, máximo brillo y profundidad. Relación 2:1. Kit completo.",
-  },
-  {
-    id: 5, codigo: "H69-7.5", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H69 UHS Vantix Plus",
-    presentacion: "Kit 7,5 lt (barniz + catalizador)",
-    precio: 486300,
-    imagen: IMG.H69,
-    descripcion: "Ultra alto sólidos Vantix Plus, presentación profesional. Kit completo.",
-  },
-  {
-    id: 6, codigo: "H77-1.5", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H77 UHS Air-Wide",
-    presentacion: "Kit 1,5 lt (barniz + catalizador)",
-    precio: 89640,
-    imagen: IMG.H77,
-    descripcion: "Barniz UHS de secado rápido, amplia ventana de aplicación. Kit completo.",
-  },
-  {
-    id: 7, codigo: "H77-7.5", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H77 UHS Air-Wide",
-    presentacion: "Kit 7,5 lt (barniz + catalizador)",
-    precio: 448200,
-    imagen: IMG.H77,
-    descripcion: "Barniz UHS Air-Wide presentación profesional. Kit completo con catalizador.",
-  },
-  {
-    id: 8, codigo: "H67", linea: "Sprint", categoria: "Barnices",
-    nombre: "Kit Barniz H67 UHS GT",
-    presentacion: "Kit 1,5 lt (barniz + catalizador)",
-    precio: 69700,
-    imagen: IMG.H67,
-    descripcion: "Ultra alto sólidos, tecnología GT. Kit incluye barniz y catalizador.",
-  },
+  { id: 1,  codigo: "H59",    linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H59 HS Sprint-Air GT Clear", presentacion: "Kit 1,5 lt", precio: 85700,  imagen: IMG.H59,  descripcion: "Barniz alto sólidos curado rápido 2:1. Kit incluye catalizador." },
+  { id: 2,  codigo: "H59-7",  linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H59 HS Sprint-Air GT Clear", presentacion: "Kit 7,5 lt", precio: 406800, imagen: IMG.H59,  descripcion: "Barniz HS curado rápido, presentación profesional. Incluye catalizador." },
+  { id: 3,  codigo: "H62",    linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H62 HS Fast Anti-Rayado",    presentacion: "Kit 7,5 lt", precio: 283950, precioPromo: 239000, imagen: IMG.H62, descripcion: "Barniz HS secado rápido con resistencia a rayaduras. Incluye catalizador." },
+  { id: 4,  codigo: "H69",    linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H69 UHS Vantix Plus",        presentacion: "Kit 1,5 lt", precio: 106150, imagen: IMG.H69,  descripcion: "Ultra alto sólidos, máximo brillo y profundidad 2:1. Incluye catalizador." },
+  { id: 5,  codigo: "H69-7",  linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H69 UHS Vantix Plus",        presentacion: "Kit 7,5 lt", precio: 486300, imagen: IMG.H69,  descripcion: "Ultra alto sólidos Vantix Plus profesional. Incluye catalizador." },
+  { id: 6,  codigo: "H77",    linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H77 UHS Air-Wide",           presentacion: "Kit 1,5 lt", precio: 89640,  imagen: IMG.H77,  descripcion: "Barniz UHS secado rápido, amplia ventana de aplicación. Incluye catalizador." },
+  { id: 7,  codigo: "H77-7",  linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H77 UHS Air-Wide",           presentacion: "Kit 7,5 lt", precio: 448200, imagen: IMG.H77,  descripcion: "Barniz UHS Air-Wide presentación profesional. Incluye catalizador." },
+  { id: 8,  codigo: "H67",    linea: "Sprint", categoria: "Barnices", nombre: "Kit Barniz H67 UHS GT",                 presentacion: "Kit 1,5 lt", precio: 69700,  imagen: IMG.H67,  descripcion: "Ultra alto sólidos tecnología GT. Incluye catalizador." },
 
   // ══════════════════════════════════════════
-  //  PRIMERS / APAREJOS
+  //  PRIMERS 4:1 — F46/F47/F48/F49
   // ══════════════════════════════════════════
-  {
-    id: 9, codigo: "PRIMER-GT", linea: "Sprint", categoria: "Primers",
-    nombre: "Kit Primer GT 4:1",
-    presentacion: "Kit 1,2 lt (primer + catalizador)",
-    precio: 65000,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Primer aparejo GT 4:1. Kit listo para usar, incluye catalizador. Colores: blanco, gris, negro.",
-  },
-  {
-    id: 10, codigo: "F40", linea: "Sprint", categoria: "Primers",
-    nombre: "Kit Primer F40 5:1 2K",
-    presentacion: "Kit 5 lt (primer + catalizador)",
-    precio: 217080, precioPromo: 169000,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Primer 2K de alta calidad, relación 5:1. Excelente adherencia y relleno. Kit completo.",
-  },
-  {
-    id: 11, codigo: "F56-F59", linea: "Sprint", categoria: "Primers",
-    nombre: "Primer 5:1 2K (F56/F57/F58/F59)",
-    presentacion: "1 lt — Blanco / Gris Claro / Gris Oscuro / Negro",
-    precio: 49200,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Primer GT 2K HS 5:1. Disponible en blanco, gris claro, gris oscuro y negro.",
-  },
-  {
-    id: 12, codigo: "F46-F49", linea: "Sprint", categoria: "Primers",
-    nombre: "Primer 4:1 (F46/F47/F48/F49)",
-    presentacion: "4 lt — Blanco / Gris Claro / Gris Oscuro / Negro",
-    precio: 105000,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Primer aparejo GT 4:1. Gran capacidad de relleno. Colores: blanco, gris y negro.",
-  },
-  {
-    id: 13, codigo: "A14", linea: "Sprint", categoria: "Primers",
-    nombre: "Primer Surfacer Nitro A14",
-    presentacion: "1 lt",
-    precio: 84850,
-    imagen: "https://www.icriberica.com/wp-content/uploads/2024/07/A14-1L.jpg",
-    descripcion: "Primer surfacer nitro, excelente nivelado y agarre. Listo para lijar.",
-  },
+  { id: 9,  codigo: "F46", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F46 Blanco 4:1",     presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color blanco. Alta adherencia, gran relleno." },
+  { id: 10, codigo: "F47", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F47 Gris Claro 4:1", presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris claro. Alta adherencia, gran relleno." },
+  { id: 11, codigo: "F48", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F48 Gris Oscuro 4:1",presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris oscuro. Alta adherencia, gran relleno." },
+  { id: 12, codigo: "F49", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F49 Negro 4:1",       presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color negro. Alta adherencia, gran relleno." },
+
+  // ══════════════════════════════════════════
+  //  PRIMERS 5:1 2K — F56/F57/F58/F59
+  // ══════════════════════════════════════════
+  { id: 13, codigo: "F56", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F56 Blanco 5:1 2K",     presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color blanco. Excelente relleno y nivelado." },
+  { id: 14, codigo: "F57", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F57 Gris Claro 5:1 2K", presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris claro. Excelente relleno y nivelado." },
+  { id: 15, codigo: "F58", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F58 Gris Oscuro 5:1 2K",presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris oscuro. Excelente relleno y nivelado." },
+  { id: 16, codigo: "F59", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F59 Negro 5:1 2K",       presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color negro. Excelente relleno y nivelado." },
+
+  // ══════════════════════════════════════════
+  //  KIT PRIMERS
+  // ══════════════════════════════════════════
+  { id: 17, codigo: "PRIMER-GT", linea: "Sprint", categoria: "Primers 4:1", nombre: "Kit Primer GT 4:1",   presentacion: "Kit 1,2 lt (primer + cat.)", precio: 65000,  imagen: IMG.PRIMER_4K, descripcion: "Kit primer GT 4:1 listo para usar. Incluye catalizador. Varios colores." },
+  { id: 18, codigo: "F40",       linea: "Sprint", categoria: "Primers 5:1", nombre: "Kit Primer F40 5:1 2K", presentacion: "Kit 5 lt (primer + cat.)",   precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_5K, descripcion: "Kit primer 2K 5:1, gran adherencia y relleno. Incluye catalizador." },
+  { id: 19, codigo: "A14",       linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer Surfacer Nitro A14", presentacion: "1 lt",                   precio: 84850,  imagen: IMG.A14, descripcion: "Primer surfacer nitro, excelente nivelado. Listo para lijar." },
 
   // ══════════════════════════════════════════
   //  MASILLAS
   // ══════════════════════════════════════════
-  {
-    id: 14, codigo: "S61", linea: "Sprint", categoria: "Masillas",
-    nombre: "Masilla One Light S61 Yellow",
-    presentacion: "3 lt",
-    precio: 93000, precioPromo: 74900,
-    imagen: IMG.S61,
-    descripcion: "Masilla ligera amarilla, fácil lijado y acabado liso. Alta capacidad de relleno.",
-  },
-  {
-    id: 15, codigo: "S97", linea: "Sprint", categoria: "Masillas",
-    nombre: "Masilla Poliéster S97 Beige",
-    presentacion: "1 lt",
-    precio: 46900,
-    imagen: IMG.S97,
-    descripcion: "Masilla poliéster beige de uso universal, alta capacidad de relleno.",
-  },
-  {
-    id: 16, codigo: "S99", linea: "Sprint", categoria: "Masillas",
-    nombre: "Masilla Poliéster S99 Blanca",
-    presentacion: "1 lt",
-    precio: 50300, precioPromo: 42900,
-    imagen: IMG.S97,
-    descripcion: "Masilla poliéster blanca, acabado suave y fácil aplicación.",
-  },
-  {
-    id: 17, codigo: "S20", linea: "Sprint", categoria: "Masillas",
-    nombre: "Masilla S20 Aluminio",
-    presentacion: "1 lt",
-    precio: 49200,
-    imagen: IMG.S20,
-    descripcion: "Masilla con aluminio, resistente a altas temperaturas.",
-  },
-  {
-    id: 18, codigo: "S35", linea: "Sprint", categoria: "Masillas",
-    nombre: "Masilla S35 Plásticos",
-    presentacion: "1 lt",
-    precio: 49200,
-    imagen: IMG.S35,
-    descripcion: "Masilla especial para plásticos flexible, excelente adherencia.",
-  },
+  { id: 20, codigo: "S61", linea: "Sprint", categoria: "Masillas", nombre: "Masilla One Light S61 Yellow", presentacion: "3 lt",    precio: 93000,  precioPromo: 74900, imagen: IMG.S61, descripcion: "Masilla ligera, fácil lijado y acabado liso. Alta capacidad de relleno." },
+  { id: 21, codigo: "S97", linea: "Sprint", categoria: "Masillas", nombre: "Masilla Poliéster S97 Beige",  presentacion: "1 lt",    precio: 46900,  imagen: IMG.S97, descripcion: "Masilla poliéster beige de uso universal, alta capacidad de relleno." },
+  { id: 22, codigo: "S99", linea: "Sprint", categoria: "Masillas", nombre: "Masilla Poliéster S99 Blanca", presentacion: "1 lt",    precio: 50300,  precioPromo: 42900, imagen: IMG.S97, descripcion: "Masilla poliéster blanca, acabado suave y fácil aplicación." },
+  { id: 23, codigo: "S20", linea: "Sprint", categoria: "Masillas", nombre: "Masilla S20 Aluminio",         presentacion: "1 lt",    precio: 49200,  imagen: IMG.S20, descripcion: "Masilla con aluminio, resistente a altas temperaturas." },
+  { id: 24, codigo: "S35", linea: "Sprint", categoria: "Masillas", nombre: "Masilla S35 Plásticos",        presentacion: "1 lt",    precio: 49200,  imagen: IMG.S35, descripcion: "Masilla especial para plásticos, excelente adherencia y flexibilidad." },
 
   // ══════════════════════════════════════════
   //  SELLADORES
   // ══════════════════════════════════════════
-  {
-    id: 19, codigo: "B320-GR", linea: "Sprint", categoria: "Selladores",
-    nombre: "Sellador Extra Body B320 Gris",
-    presentacion: "3 lt",
-    precio: 130000,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Sellador Extra Body gris, alta viscosidad y excelente cobertura. 3 litros.",
-  },
-  {
-    id: 20, codigo: "B320-BK", linea: "Sprint", categoria: "Selladores",
-    nombre: "Gladiator Black — Sellador",
-    presentacion: "1 lt",
-    precio: 46900,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Sellador Gladiator negro, máxima cobertura y adherencia.",
-  },
-  {
-    id: 21, codigo: "B320-TI", linea: "Sprint", categoria: "Selladores",
-    nombre: "Gladiator Tinteable — Sellador",
-    presentacion: "1 lt",
-    precio: 46900,
-    imagen: IMG.GLADIATOR,
-    descripcion: "Sellador Gladiator tinteable, adaptable a cualquier fondo.",
-  },
+  { id: 25, codigo: "B320-GR", linea: "Sprint", categoria: "Selladores", nombre: "Sellador Extra Body B320 Gris",       presentacion: "3 lt", precio: 130000, imagen: IMG.GLADIATOR, descripcion: "Sellador Extra Body gris, alta viscosidad y cobertura. Bidón 3 litros." },
+  { id: 26, codigo: "B320-BK", linea: "Sprint", categoria: "Selladores", nombre: "Gladiator Black — Sellador",          presentacion: "1 lt", precio: 46900,  imagen: IMG.GLADIATOR, descripcion: "Sellador Gladiator negro, máxima cobertura y adherencia." },
+  { id: 27, codigo: "B320-TI", linea: "Sprint", categoria: "Selladores", nombre: "Gladiator Tinteable — Sellador",      presentacion: "1 lt", precio: 46900,  imagen: IMG.GLADIATOR, descripcion: "Sellador Gladiator tinteable, adaptable a cualquier fondo." },
 
   // ══════════════════════════════════════════
   //  ACELERANTES
   // ══════════════════════════════════════════
-  {
-    id: 22, codigo: "SPRINT-AC", linea: "Sprint", categoria: "Acelerantes",
-    nombre: "Acelerante Sprint",
-    presentacion: "200 ml",
-    precio: 50200,
-    imagen: "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
-    descripcion: "Acelerante Sprint para reducir tiempos de secado. Uso con barnices y primers.",
-  },
-  {
-    id: 23, codigo: "AC-XRAP", linea: "Sprint", categoria: "Acelerantes",
-    nombre: "Acelerante Extra Rápido",
-    presentacion: "1 lt",
-    precio: 46900,
-    imagen: "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
-    descripcion: "Acelerante extra rápido, máxima reducción del tiempo de secado.",
-  },
-  {
-    id: 24, codigo: "AC-RAP", linea: "Sprint", categoria: "Acelerantes",
-    nombre: "Acelerante Rápido",
-    presentacion: "1 lt",
-    precio: 46900,
-    imagen: "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
-    descripcion: "Acelerante rápido para pinturas y barnices de secado estándar.",
-  },
+  { id: 28, codigo: "SPRINT-AC", linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Sprint",        presentacion: "200 ml", precio: 50200, imagen: IMG.H59, descripcion: "Acelerante Sprint para reducir tiempos de secado de barnices y primers." },
+  { id: 29, codigo: "AC-XRAP",   linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Extra Rápido",  presentacion: "1 lt",   precio: 46900, imagen: IMG.H59, descripcion: "Máxima reducción del tiempo de secado." },
+  { id: 30, codigo: "AC-RAP",    linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Rápido",        presentacion: "1 lt",   precio: 46900, imagen: IMG.H59, descripcion: "Acelerante rápido para pinturas y barnices de secado estándar." },
 
   // ══════════════════════════════════════════
   //  ACCESORIOS
   // ══════════════════════════════════════════
-  {
-    id: 25, codigo: "PISTOLA", linea: "Sprint", categoria: "Accesorios",
-    nombre: "Pistola Aplicadora",
-    presentacion: "Unidad",
-    precio: 180000,
-    imagen: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
-    descripcion: "Pistola aplicadora profesional para selladores y productos de textura.",
-  },
+  { id: 31, codigo: "PISTOLA", linea: "Sprint", categoria: "Accesorios", nombre: "Pistola Aplicadora", presentacion: "Unidad", precio: 180000, imagen: IMG.PISTOLA, descripcion: "Pistola aplicadora profesional para selladores y productos de textura." },
 
   // ══════════════════════════════════════════
   //  LÍNEA TORO
   // ══════════════════════════════════════════
-  {
-    id: 26, codigo: "001", linea: "Toro", categoria: "Diluyentes",
-    nombre: "Thinner Universal",
-    presentacion: "20 lt",
-    precio: 98000,
-    imagen: "/toro/thinner.jpg",
-    descripcion: "Thinner para limpieza y aplicación de fondos. Secado normal. Para remoción de pinturas, primers y barnices.",
-  },
-  {
-    id: 27, codigo: "003", linea: "Toro", categoria: "Diluyentes",
-    nombre: "Desengrasante",
-    presentacion: "20 lt",
-    precio: 128000,
-    imagen: "/toro/desengrasante.jpg",
-    descripcion: "Desengrasante para todo tipo de superficies. Secado rápido. Control de aplicación por beteado.",
-  },
-  {
-    id: 28, codigo: "010", linea: "Toro", categoria: "Diluyentes",
-    nombre: "Diluyente",
-    presentacion: "20 lt",
-    precio: 228000,
-    imagen: "/toro/diluyente.jpg",
-    descripcion: "Para fondos, colores y barnices. Excelente nivelado de barnices y realzador de brillo.",
-  },
+  { id: 32, codigo: "001", linea: "Toro", categoria: "Diluyentes", nombre: "Thinner Universal",  presentacion: "20 lt", precio: 98000,  imagen: "/toro/thinner.jpg",      descripcion: "Para limpieza y aplicación de fondos. Secado normal. Sin materias primas recuperadas." },
+  { id: 33, codigo: "003", linea: "Toro", categoria: "Diluyentes", nombre: "Desengrasante",       presentacion: "20 lt", precio: 128000, imagen: "/toro/desengrasante.jpg", descripcion: "Para todo tipo de superficies. Secado rápido. Control de aplicación por beteado." },
+  { id: 34, codigo: "010", linea: "Toro", categoria: "Diluyentes", nombre: "Diluyente",           presentacion: "20 lt", precio: 228000, imagen: "/toro/diluyente.jpg",     descripcion: "Para fondos, colores y barnices. Excelente nivelado y realzador de brillo." },
 ];
 
 export const promociones = productos.filter((p) => p.precioPromo !== undefined);
