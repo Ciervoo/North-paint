@@ -14,14 +14,14 @@ export default function Home() {
             <img src="/logo.jpg" alt="North Paint" className="h-9 w-auto object-contain" />
           </div>
         </Link>
-        <nav className="flex items-center gap-4 text-sm font-bold">
+        <nav className="flex items-center gap-2 sm:gap-4 text-sm font-bold">
           <Link href="/catalogo"
             style={{ backgroundColor: "var(--north-yellow)" }}
-            className="px-5 py-2 rounded-full text-white hover:opacity-90 transition-opacity shadow">
-            Ver Catálogo
+            className="px-4 sm:px-5 py-2 rounded-full text-white hover:opacity-90 transition-opacity shadow text-xs sm:text-sm">
+            <span className="hidden sm:inline">Ver </span>Catálogo
           </Link>
-          <Link href="/checkout" className="hover:text-yellow-300 transition-colors">
-            🛒 Mi pedido
+          <Link href="/checkout" className="hover:text-yellow-300 transition-colors text-xs sm:text-sm">
+            🛒 <span className="hidden sm:inline">Mi pedido</span>
           </Link>
         </nav>
       </header>
@@ -29,21 +29,39 @@ export default function Home() {
       {/* ── HERO ───────────────────────────────────────── */}
       <section style={{ background: "linear-gradient(160deg, #060e1c 0%, #0f2540 60%, #1a3a62 100%)" }}
         className="relative overflow-hidden px-4 pt-10 pb-12">
-        {/* Glow de fondo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-10"
           style={{ background: "radial-gradient(circle, #f5a623 0%, transparent 70%)", filter: "blur(60px)" }} />
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <HeroWrapper />
-          <div className="flex gap-4 flex-wrap justify-center mt-8 anim-fade-up delay-300">
+          {/* Animación Remotion — solo desktop */}
+          <div className="hidden md:block">
+            <HeroWrapper />
+          </div>
+
+          {/* Hero estático — solo mobile */}
+          <div className="flex flex-col items-center text-center md:hidden py-6 gap-4">
+            <div className="bg-white rounded-xl px-4 py-2 shadow-xl">
+              <img src="/logo.jpg" alt="North Paint" className="h-12 w-auto object-contain" />
+            </div>
+            <h1 className="text-2xl font-black text-white leading-tight">Distribuidora<br />North Paint</h1>
+            <div className="h-1 w-24 rounded" style={{ background: "linear-gradient(90deg,#f5a623,#ffd27f)" }} />
+            <p className="text-gray-300 text-xs tracking-widest uppercase">Pinturas automotrices · Haedo, Bs. As.</p>
+            <div className="flex gap-2 flex-wrap justify-center mt-1">
+              {["🎨 Línea Sprint","🐂 Línea Toro","🚚 Entrega GBA"].map(b => (
+                <span key={b} className="text-xs font-bold px-3 py-1.5 rounded-full text-white border border-white/30 bg-white/10">{b}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex gap-3 flex-wrap justify-center mt-8 anim-fade-up delay-300">
             <Link href="/catalogo"
               style={{ background: "linear-gradient(135deg, #f5a623, #e08b0a)" }}
-              className="px-9 py-4 rounded-full font-black text-white text-base shadow-2xl hover:scale-105 hover:shadow-yellow-500/30 transition-all">
+              className="px-7 sm:px-9 py-3 sm:py-4 rounded-full font-black text-white text-sm sm:text-base shadow-2xl hover:scale-105 transition-all">
               🛒 Ver Catálogo Completo
             </Link>
             <a href="https://wa.me/5491168592507"
-              className="px-9 py-4 rounded-full font-black text-white text-base border-2 border-white/40 hover:bg-white/10 transition-all backdrop-blur-sm">
-              💬 Consultá por WhatsApp
+              className="px-7 sm:px-9 py-3 sm:py-4 rounded-full font-black text-white text-sm sm:text-base border-2 border-white/40 hover:bg-white/10 transition-all backdrop-blur-sm">
+              💬 WhatsApp
             </a>
           </div>
         </div>
@@ -72,52 +90,68 @@ export default function Home() {
       {/* ── LÍNEAS — showcase con fotos reales ─────────── */}
       <section className="py-0" style={{ background: "#060e1c" }}>
         {/* Sprint */}
-        <div className="relative overflow-hidden min-h-72 flex items-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
-          <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
-            alt="Línea Sprint"
-            className="absolute right-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-60"
-            style={{ maxWidth: "55%" }}
-          />
-          <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg">
-            <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
-            <h2 className="text-4xl font-black text-white mb-3 leading-tight">
-              🎨 Línea<br />
-              <span className="shimmer-text">Sprint</span>
-            </h2>
-            <p className="text-gray-300 text-sm mb-5 leading-relaxed">
-              Barnices HS/UHS, primers 2K, masillas, selladores Gladiator y acelerantes profesionales.
-            </p>
-            <Link href="/catalogo?linea=Sprint"
-              style={{ backgroundColor: "var(--north-yellow)" }}
-              className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">
-              Ver Línea Sprint →
-            </Link>
+        <div className="overflow-hidden bg-[#060e1c]">
+          {/* Mobile */}
+          <div className="flex flex-col md:hidden">
+            <div className="h-44 flex items-center justify-center bg-[#060e1c] px-4">
+              <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
+                alt="Línea Sprint" className="h-full object-contain opacity-80" />
+            </div>
+            <div className="px-6 py-8">
+              <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
+              <h2 className="text-3xl font-black text-white mb-3 leading-tight">🎨 Línea <span className="shimmer-text">Sprint</span></h2>
+              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Barnices HS/UHS, primers 2K, masillas, selladores y acelerantes profesionales.</p>
+              <Link href="/catalogo?linea=Sprint" style={{ backgroundColor: "var(--north-yellow)" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white shadow-lg">Ver Línea Sprint →</Link>
+            </div>
+          </div>
+          {/* Desktop */}
+          <div className="hidden md:relative md:flex md:items-center md:min-h-72 md:overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
+            <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
+              alt="Línea Sprint"
+              className="absolute right-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-60"
+              style={{ maxWidth: "55%" }}
+            />
+            <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg">
+              <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
+              <h2 className="text-4xl font-black text-white mb-3 leading-tight">🎨 Línea<br /><span className="shimmer-text">Sprint</span></h2>
+              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Barnices HS/UHS, primers 2K, masillas, selladores y acelerantes profesionales.</p>
+              <Link href="/catalogo?linea=Sprint" style={{ backgroundColor: "var(--north-yellow)" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">Ver Línea Sprint →</Link>
+            </div>
           </div>
         </div>
 
         {/* Toro */}
-        <div className="relative overflow-hidden min-h-72 flex items-center" style={{ backgroundColor: "#1a0505" }}>
-          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent z-10" />
-          <img src="/toro/diluyente.jpg"
-            alt="Línea Toro"
-            className="absolute left-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-70 anim-float"
-            style={{ maxWidth: "50%" }}
-          />
-          <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg ml-auto text-right">
-            <span className="text-xs font-black uppercase tracking-widest text-red-400 mb-2 block">Producto argentino</span>
-            <h2 className="text-4xl font-black text-white mb-3 leading-tight">
-              🐂 Línea<br />
-              <span style={{ color: "#ef4444" }}>Toro</span>
-            </h2>
-            <p className="text-gray-300 text-sm mb-5 leading-relaxed">
-              Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.
-            </p>
-            <Link href="/catalogo?linea=Toro"
-              style={{ backgroundColor: "#dc2626" }}
-              className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">
-              Ver Línea Toro →
-            </Link>
+        <div className="overflow-hidden bg-[#1a0505]">
+          {/* Mobile */}
+          <div className="flex flex-col md:hidden">
+            <div className="h-44 flex items-center justify-center bg-[#1a0505] px-4">
+              <img src="/toro/diluyente.jpg" alt="Línea Toro" className="h-full object-contain opacity-80 anim-float" />
+            </div>
+            <div className="px-6 py-8">
+              <span className="text-xs font-black uppercase tracking-widest text-red-400 mb-2 block">Producto argentino</span>
+              <h2 className="text-3xl font-black text-white mb-3 leading-tight">🐂 Línea <span style={{ color: "#ef4444" }}>Toro</span></h2>
+              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.</p>
+              <Link href="/catalogo?linea=Toro" style={{ backgroundColor: "#dc2626" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white shadow-lg">Ver Línea Toro →</Link>
+            </div>
+          </div>
+          {/* Desktop */}
+          <div className="hidden md:relative md:flex md:items-center md:min-h-72 md:overflow-hidden" style={{ backgroundColor: "#1a0505" }}>
+            <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent z-10" />
+            <img src="/toro/diluyente.jpg" alt="Línea Toro"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-70 anim-float"
+              style={{ maxWidth: "50%" }}
+            />
+            <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg ml-auto text-right">
+              <span className="text-xs font-black uppercase tracking-widest text-red-400 mb-2 block">Producto argentino</span>
+              <h2 className="text-4xl font-black text-white mb-3 leading-tight">🐂 Línea<br /><span style={{ color: "#ef4444" }}>Toro</span></h2>
+              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.</p>
+              <Link href="/catalogo?linea=Toro" style={{ backgroundColor: "#dc2626" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">Ver Línea Toro →</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -131,14 +165,14 @@ export default function Home() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
             {[
-              { nombre: "H69 UHS Vantix Plus", precio: "$106.150", img: "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg", promo: false },
-              { nombre: "H62 HS Anti-Rayado", precio: "$239.000", img: "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg", promo: true },
-              { nombre: "H77 UHS Air-Wide", precio: "$89.640", img: "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png", promo: false },
-              { nombre: "Primer F40 2K", precio: "$169.000", img: "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg", promo: true },
-              { nombre: "Masilla S61", precio: "$74.900", img: "https://www.icriberica.com/wp-content/uploads/2024/09/SC4-ROYAL-SOFT-PUTTY-Padella.jpg", promo: true },
-              { nombre: "Gladiator Black", precio: "$46.900", img: "/gladiator.jpg", promo: false },
-              { nombre: "Diluyente Toro 20L", precio: "$228.000", img: "/toro/diluyente.jpg", promo: false },
-              { nombre: "Desengrasante 20L", precio: "$128.000", img: "/toro/desengrasante.jpg", promo: false },
+              { nombre: "H69 UHS Vantix Plus",        precio: "$106.150", img: "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg",         promo: false },
+              { nombre: "H62 HS Anti-Rayado",          precio: "$239.000", img: "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg",         promo: true  },
+              { nombre: "H77 UHS Air-Wide",            precio: "$89.640",  img: "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png", promo: false },
+              { nombre: "Kit Primer F56 5:1 2K",       precio: "$65.000",  img: "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",         promo: false },
+              { nombre: "Masilla One Light S61",        precio: "$74.900",  img: "/sprint/masilla-s61.jpg",                                                  promo: true  },
+              { nombre: "Sellador Extra Body B320",     precio: "$46.900",  img: "/sprint/b320-extrabody.jpg",                                               promo: false },
+              { nombre: "Diluyente Toro 20L",           precio: "$193.800", img: "/toro/diluyente.jpg",                                                      promo: true  },
+              { nombre: "Desengrasante Toro 20L",       precio: "$108.800", img: "/toro/desengrasante.jpg",                                                  promo: true  },
             ].map((p) => (
               <Link key={p.nombre} href="/catalogo"
                 className="snap-start flex-shrink-0 w-44 bg-white rounded-2xl overflow-hidden card-hover border"
