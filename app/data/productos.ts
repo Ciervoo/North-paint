@@ -20,7 +20,7 @@ const IMG = {
   PRIMER_5K:      "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",
   PRIMER_4K:      "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg",
   GLADIATOR:      "/gladiator.jpg",
-  PISTOLA:        "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
+  PISTOLA:        "/sprint/pistola-gladiator.jpg",
   S20:            "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
   S35:            "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
   S61:            "/sprint/masilla-s61.jpg",
@@ -85,21 +85,19 @@ export const productos: Producto[] = [
   // ══════════════════════════════════════════
   //  ACELERANTES
   // ══════════════════════════════════════════
-  { id: 28, codigo: "V03",      linea: "Sprint", categoria: "Acelerantes", nombre: "V03 Sprint Acelerante",   presentacion: "200 ml", precio: 50200, imagen: IMG.SPRINTER, descripcion: "Acelerante Sprint para reducir tiempos de secado de barnices y primers." },
-  { id: 29, codigo: "AC-XRAP", linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Extra Rápido", presentacion: "1 lt",   precio: 46900, imagen: IMG.SPRINTER, descripcion: "Máxima reducción del tiempo de secado." },
-  { id: 30, codigo: "AC-RAP",  linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Rápido",       presentacion: "1 lt",   precio: 46900, imagen: IMG.SPRINTER, descripcion: "Acelerante rápido para pinturas y barnices de secado estándar." },
+  { id: 28, codigo: "V03", linea: "Sprint", categoria: "Acelerantes", nombre: "V03 Sprint Acelerante", presentacion: "200 ml", precio: 50200, imagen: IMG.SPRINTER, descripcion: "Acelerante Sprint para reducir tiempos de secado de barnices y primers." },
 
   // ══════════════════════════════════════════
   //  ACCESORIOS
   // ══════════════════════════════════════════
-  { id: 31, codigo: "PISTOLA", linea: "Sprint", categoria: "Accesorios", nombre: "Pistola Aplicadora", presentacion: "Unidad", precio: 180000, imagen: IMG.PISTOLA, descripcion: "Pistola aplicadora profesional para selladores y productos de textura." },
+  { id: 31, codigo: "PISTOLA", linea: "Sprint", categoria: "Accesorios", nombre: "Gladiator Gun — Pistola Aplicadora", presentacion: "Unidad", precio: 180000, imagen: IMG.PISTOLA, descripcion: "Pistola Gladiator Gun, se atornilla directamente a la botella. Ajustable, ergonómica y fácil de usar." },
 
   // ══════════════════════════════════════════
   //  LÍNEA TORO
   // ══════════════════════════════════════════
-  { id: 32, codigo: "001", linea: "Toro", categoria: "Diluyentes", nombre: "Thinner Universal",  presentacion: "20 lt", precio: 98000,  imagen: "/toro/thinner.jpg",      descripcion: "Para limpieza y aplicación de fondos. Secado normal. Sin materias primas recuperadas." },
-  { id: 33, codigo: "003", linea: "Toro", categoria: "Diluyentes", nombre: "Desengrasante",       presentacion: "20 lt", precio: 128000, imagen: "/toro/desengrasante.jpg", descripcion: "Para todo tipo de superficies. Secado rápido. Control de aplicación por beteado." },
-  { id: 34, codigo: "010", linea: "Toro", categoria: "Diluyentes", nombre: "Diluyente",           presentacion: "20 lt", precio: 228000, imagen: "/toro/diluyente.jpg",     descripcion: "Para fondos, colores y barnices. Excelente nivelado y realzador de brillo." },
+  { id: 32, codigo: "001", linea: "Toro", categoria: "Diluyentes", nombre: "Thinner Universal",  presentacion: "20 lt", precio: 98000,  precioPromo: 83300,  imagen: "/toro/thinner.jpg",      descripcion: "Para limpieza y aplicación de fondos. Secado normal. Sin materias primas recuperadas." },
+  { id: 33, codigo: "003", linea: "Toro", categoria: "Diluyentes", nombre: "Desengrasante",       presentacion: "20 lt", precio: 128000, precioPromo: 108800, imagen: "/toro/desengrasante.jpg", descripcion: "Para todo tipo de superficies. Secado rápido. Control de aplicación por beteado." },
+  { id: 34, codigo: "010", linea: "Toro", categoria: "Diluyentes", nombre: "Diluyente",           presentacion: "20 lt", precio: 228000, precioPromo: 193800, imagen: "/toro/diluyente.jpg",     descripcion: "Para fondos, colores y barnices. Excelente nivelado y realzador de brillo." },
 ];
 
 export const promociones = productos.filter((p) => p.precioPromo !== undefined);
