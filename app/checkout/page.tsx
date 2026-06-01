@@ -5,12 +5,9 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import emailjs from "@emailjs/browser";
 
-// ─── Configurá estos valores en emailjs.com ───────────────
-// Los vas a obtener cuando crees tu cuenta en emailjs.com (gratis)
-const EMAILJS_SERVICE_ID = "service_northpaint";
-const EMAILJS_TEMPLATE_ID = "template_northpaint";
-const EMAILJS_PUBLIC_KEY = "TU_PUBLIC_KEY_AQUI";
-// ──────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 export default function Checkout() {
   const { items, totalPrecio, vaciarCarrito } = useCart();
