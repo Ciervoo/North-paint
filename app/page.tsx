@@ -87,73 +87,63 @@ export default function Home() {
       {/* ── PROMOS ─────────────────────────────────────── */}
       <PromoSection />
 
-      {/* ── LÍNEAS — showcase con fotos reales ─────────── */}
-      <section className="py-0" style={{ background: "#060e1c" }}>
+      {/* ── LÍNEAS — showcase ──────────────────────────── */}
+      <section style={{ background: "#060e1c" }}>
+
         {/* Sprint */}
-        <div className="overflow-hidden bg-[#060e1c]">
-          {/* Mobile */}
-          <div className="flex flex-col md:hidden">
-            <div className="h-44 flex items-center justify-center bg-[#060e1c] px-4">
+        <div style={{ background: "#060e1c" }} className="px-6 py-12">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
+            {/* Texto */}
+            <div className="flex-1 text-center md:text-left order-2 md:order-1">
+              <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
+                🎨 Línea<br /><span className="shimmer-text">Sprint</span>
+              </h2>
+              <p className="text-gray-300 text-sm mb-6 leading-relaxed max-w-sm mx-auto md:mx-0">
+                Barnices HS/UHS, primers 2K, masillas, selladores y acelerantes profesionales.
+              </p>
+              <Link href="/catalogo?linea=Sprint"
+                style={{ backgroundColor: "var(--north-yellow)" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">
+                Ver Línea Sprint →
+              </Link>
+            </div>
+            {/* Imagen */}
+            <div className="flex-1 flex items-center justify-center order-1 md:order-2">
               <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
-                alt="Línea Sprint" className="h-full object-contain opacity-80" />
-            </div>
-            <div className="px-6 py-8">
-              <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
-              <h2 className="text-3xl font-black text-white mb-3 leading-tight">🎨 Línea <span className="shimmer-text">Sprint</span></h2>
-              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Barnices HS/UHS, primers 2K, masillas, selladores y acelerantes profesionales.</p>
-              <Link href="/catalogo?linea=Sprint" style={{ backgroundColor: "var(--north-yellow)" }}
-                className="inline-block px-7 py-3 rounded-full font-black text-white shadow-lg">Ver Línea Sprint →</Link>
-            </div>
-          </div>
-          {/* Desktop */}
-          <div className="hidden md:relative md:flex md:items-center md:min-h-72 md:overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
-            <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
-              alt="Línea Sprint"
-              className="absolute right-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-60"
-              style={{ maxWidth: "55%" }}
-            />
-            <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg">
-              <span className="text-xs font-black uppercase tracking-widest text-yellow-400 mb-2 block">Pintura automotriz</span>
-              <h2 className="text-4xl font-black text-white mb-3 leading-tight">🎨 Línea<br /><span className="shimmer-text">Sprint</span></h2>
-              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Barnices HS/UHS, primers 2K, masillas, selladores y acelerantes profesionales.</p>
-              <Link href="/catalogo?linea=Sprint" style={{ backgroundColor: "var(--north-yellow)" }}
-                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">Ver Línea Sprint →</Link>
+                alt="Línea Sprint"
+                className="w-48 md:w-64 object-contain opacity-90 drop-shadow-2xl" />
             </div>
           </div>
         </div>
 
         {/* Toro */}
-        <div className="overflow-hidden bg-[#1a0505]">
-          {/* Mobile */}
-          <div className="flex flex-col md:hidden">
-            <div className="h-44 flex items-center justify-center bg-[#1a0505] px-4">
-              <img src="/toro/diluyente.jpg" alt="Línea Toro" className="h-full object-contain opacity-80 anim-float" />
+        <div style={{ background: "#1a0505" }} className="px-6 py-12">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
+            {/* Imagen */}
+            <div className="flex-1 flex items-center justify-center order-1">
+              <img src="/toro/diluyente.jpg"
+                alt="Línea Toro"
+                className="w-48 md:w-64 object-contain opacity-90 drop-shadow-2xl anim-float" />
             </div>
-            <div className="px-6 py-8">
+            {/* Texto */}
+            <div className="flex-1 text-center md:text-left order-2">
               <span className="text-xs font-black uppercase tracking-widest text-red-400 mb-2 block">Producto argentino</span>
-              <h2 className="text-3xl font-black text-white mb-3 leading-tight">🐂 Línea <span style={{ color: "#ef4444" }}>Toro</span></h2>
-              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.</p>
-              <Link href="/catalogo?linea=Toro" style={{ backgroundColor: "#dc2626" }}
-                className="inline-block px-7 py-3 rounded-full font-black text-white shadow-lg">Ver Línea Toro →</Link>
-            </div>
-          </div>
-          {/* Desktop */}
-          <div className="hidden md:relative md:flex md:items-center md:min-h-72 md:overflow-hidden" style={{ backgroundColor: "#1a0505" }}>
-            <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent z-10" />
-            <img src="/toro/diluyente.jpg" alt="Línea Toro"
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-full object-contain opacity-70 anim-float"
-              style={{ maxWidth: "50%" }}
-            />
-            <div className="relative z-20 px-8 md:px-16 py-12 max-w-lg ml-auto text-right">
-              <span className="text-xs font-black uppercase tracking-widest text-red-400 mb-2 block">Producto argentino</span>
-              <h2 className="text-4xl font-black text-white mb-3 leading-tight">🐂 Línea<br /><span style={{ color: "#ef4444" }}>Toro</span></h2>
-              <p className="text-gray-300 text-sm mb-5 leading-relaxed">Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.</p>
-              <Link href="/catalogo?linea=Toro" style={{ backgroundColor: "#dc2626" }}
-                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">Ver Línea Toro →</Link>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
+                🐂 Línea<br /><span style={{ color: "#ef4444" }}>Toro</span>
+              </h2>
+              <p className="text-gray-300 text-sm mb-6 leading-relaxed max-w-sm mx-auto md:mx-0">
+                Thinner, desengrasante y diluyente en bidones de 20 litros. Sin materias primas recuperadas.
+              </p>
+              <Link href="/catalogo?linea=Toro"
+                style={{ backgroundColor: "#dc2626" }}
+                className="inline-block px-7 py-3 rounded-full font-black text-white hover:scale-105 transition-transform shadow-lg">
+                Ver Línea Toro →
+              </Link>
             </div>
           </div>
         </div>
+
       </section>
 
       {/* ── PRODUCTOS DESTACADOS ───────────────────────── */}
