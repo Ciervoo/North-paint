@@ -5,8 +5,15 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { motion } from "framer-motion";
 import { productos, categoriasSprint } from "../data/productos";
 import AgregarCarritoBtn from "../components/AgregarCarritoBtn";
+
+const stagger = { show: { transition: { staggerChildren: 0.07 } } };
+const cardAnim = {
+  hidden: { opacity: 0, y: 28, scale: 0.96 },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 function CatalogoContent() {
   const searchParams = useSearchParams();
@@ -92,11 +99,17 @@ function CatalogoContent() {
       )}
 
       {/* Grid de productos */}
-      <div className={`grid gap-5 ${lineaActiva === "Toro" ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"}`}>
+      <motion.div
+        className={`grid gap-5 ${lineaActiva === "Toro" ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"}`}
+        variants={stagger} initial="hidden" animate="show" key={`${lineaActiva}-${categoriaActiva}`}
+      >
         {productosFiltrados.map((p) => (
-          <div
+          <motion.div
             key={p.id}
-            className="bg-white rounded-2xl shadow-sm border overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
+            variants={cardAnim}
+            whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.12)" }}
+            transition={{ duration: 0.2 }}
+            className="bg-white rounded-2xl shadow-sm border overflow-hidden flex flex-col"
             style={{ borderColor: p.precioPromo ? "var(--north-yellow)" : "#f0f0f0", borderWidth: p.precioPromo ? 2 : 1 }}
           >
             {/* Badge promo */}
@@ -146,9 +159,9 @@ function CatalogoContent() {
 
               <AgregarCarritoBtn producto={p} />
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {productosFiltrados.length === 0 && (
         <div className="text-center text-gray-400 py-16 text-lg">No se encontraron productos.</div>
