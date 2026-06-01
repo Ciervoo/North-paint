@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { productos, categorias } from "../data/productos";
+import AgregarCarritoBtn from "../components/AgregarCarritoBtn";
 
 export default function Catalogo() {
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
@@ -86,13 +87,7 @@ export default function Catalogo() {
               <p className="text-xl font-bold" style={{ color: "var(--north-yellow)" }}>
                 ${p.precio.toLocaleString("es-AR")}
               </p>
-              <Link
-                href={`/pedido?producto=${encodeURIComponent(p.nombre)}&codigo=${p.codigo}`}
-                style={{ backgroundColor: "var(--north-blue)" }}
-                className="mt-auto text-center text-white text-sm font-semibold py-2 rounded-full hover:opacity-90 transition-opacity"
-              >
-                Pedir este producto
-              </Link>
+              <AgregarCarritoBtn producto={p} />
             </div>
           ))}
         </div>
