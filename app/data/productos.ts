@@ -12,20 +12,22 @@ export type Producto = {
 };
 
 const IMG = {
-  H59:       "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
-  H62:       "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg",
-  H69:       "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg",
-  H77:       "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png",
-  H67:       "https://www.icriberica.com/wp-content/uploads/2024/09/H67-5L.jpg",
-  PRIMER_5K: "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",
-  PRIMER_4K: "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg",
-  GLADIATOR: "/gladiator.jpg",
-  PISTOLA:   "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
-  S20:       "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
-  S35:       "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
-  S61:       "https://www.icriberica.com/wp-content/uploads/2024/09/Elite-small-can-2017.jpg",
-  S97:       "https://www.icriberica.com/wp-content/uploads/2024/09/SWIFT-Bulk-Filler-3_5.jpg",
-  A14:       "https://www.icriberica.com/wp-content/uploads/2024/07/A14-1L.jpg",
+  H59:            "https://www.icriberica.com/wp-content/uploads/2024/09/H55-5L.jpg",
+  H62:            "https://www.icriberica.com/wp-content/uploads/2024/09/H62-5L.jpg",
+  H69:            "https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg",
+  H77:            "https://www.icriberica.com/wp-content/uploads/2025/07/H77-5L-159x300.png",
+  H67:            "https://www.icriberica.com/wp-content/uploads/2024/09/H67-5L.jpg",
+  PRIMER_5K:      "https://www.icriberica.com/wp-content/uploads/2024/09/F77-1L.jpg",
+  PRIMER_4K:      "https://www.icriberica.com/wp-content/uploads/2024/07/F56-1L.jpg",
+  GLADIATOR:      "/gladiator.jpg",
+  PISTOLA:        "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80",
+  S20:            "https://www.icriberica.com/wp-content/uploads/2024/10/S20.jpg",
+  S35:            "https://www.icriberica.com/wp-content/uploads/2024/10/S35.jpg",
+  S61:            "/sprint/masilla-s61.jpg",
+  S97:            "/sprint/masilla-s97.jpg",
+  SPRINTER:       "/sprint/sprinter.jpg",
+  B320_EXTRABODY: "/sprint/b320-extrabody.jpg",
+  A14:            "https://www.icriberica.com/wp-content/uploads/2024/07/A14-1L.jpg",
 };
 
 export const productos: Producto[] = [
@@ -45,25 +47,24 @@ export const productos: Producto[] = [
   // ══════════════════════════════════════════
   //  PRIMERS 4:1 — F46/F47/F48/F49
   // ══════════════════════════════════════════
-  { id: 9,  codigo: "F46", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F46 Blanco 4:1",     presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color blanco. Alta adherencia, gran relleno." },
-  { id: 10, codigo: "F47", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F47 Gris Claro 4:1", presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris claro. Alta adherencia, gran relleno." },
-  { id: 11, codigo: "F48", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F48 Gris Oscuro 4:1",presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris oscuro. Alta adherencia, gran relleno." },
-  { id: 12, codigo: "F49", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F49 Negro 4:1",       presentacion: "4 lt", precio: 105000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color negro. Alta adherencia, gran relleno." },
+  { id: 9,  codigo: "F46", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F46 Blanco 4:1",      presentacion: "Kit 5 lt", precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color blanco. Alta adherencia, gran relleno. Kit incluye catalizador." },
+  { id: 10, codigo: "F47", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F47 Gris Claro 4:1",  presentacion: "Kit 5 lt", precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris claro. Alta adherencia, gran relleno. Kit incluye catalizador." },
+  { id: 11, codigo: "F48", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F48 Gris Oscuro 4:1", presentacion: "Kit 5 lt", precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color gris oscuro. Alta adherencia, gran relleno. Kit incluye catalizador." },
+  { id: 12, codigo: "F49", linea: "Sprint", categoria: "Primers 4:1", nombre: "Primer F49 Negro 4:1",        presentacion: "Kit 5 lt", precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_4K, descripcion: "Primer aparejo GT 4:1 color negro. Alta adherencia, gran relleno. Kit incluye catalizador." },
 
   // ══════════════════════════════════════════
   //  PRIMERS 5:1 2K — F56/F57/F58/F59
   // ══════════════════════════════════════════
-  { id: 13, codigo: "F56", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F56 Blanco 5:1 2K",     presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color blanco. Excelente relleno y nivelado." },
-  { id: 14, codigo: "F57", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F57 Gris Claro 5:1 2K", presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris claro. Excelente relleno y nivelado." },
-  { id: 15, codigo: "F58", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F58 Gris Oscuro 5:1 2K",presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris oscuro. Excelente relleno y nivelado." },
-  { id: 16, codigo: "F59", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F59 Negro 5:1 2K",       presentacion: "1 lt", precio: 49200, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color negro. Excelente relleno y nivelado." },
+  { id: 13, codigo: "F56", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F56 Blanco 5:1 2K",     presentacion: "Kit 1,2 lt", precio: 65000, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color blanco. Excelente relleno y nivelado. Kit incluye catalizador." },
+  { id: 14, codigo: "F57", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F57 Gris Claro 5:1 2K", presentacion: "Kit 1,2 lt", precio: 65000, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris claro. Excelente relleno y nivelado. Kit incluye catalizador." },
+  { id: 15, codigo: "F58", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F58 Gris Oscuro 5:1 2K", presentacion: "Kit 1,2 lt", precio: 65000, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color gris oscuro. Excelente relleno y nivelado. Kit incluye catalizador." },
+  { id: 16, codigo: "F59", linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer F59 Negro 5:1 2K",       presentacion: "Kit 1,2 lt", precio: 65000, imagen: IMG.PRIMER_5K, descripcion: "Primer GT 2K HS 5:1 color negro. Excelente relleno y nivelado. Kit incluye catalizador." },
 
   // ══════════════════════════════════════════
   //  KIT PRIMERS
   // ══════════════════════════════════════════
-  { id: 17, codigo: "PRIMER-GT", linea: "Sprint", categoria: "Primers 4:1", nombre: "Kit Primer GT 4:1",   presentacion: "Kit 1,2 lt (primer + cat.)", precio: 65000,  imagen: IMG.PRIMER_4K, descripcion: "Kit primer GT 4:1 listo para usar. Incluye catalizador. Varios colores." },
-  { id: 18, codigo: "F40",       linea: "Sprint", categoria: "Primers 5:1", nombre: "Kit Primer F40 5:1 2K", presentacion: "Kit 5 lt (primer + cat.)",   precio: 217080, precioPromo: 169000, imagen: IMG.PRIMER_5K, descripcion: "Kit primer 2K 5:1, gran adherencia y relleno. Incluye catalizador." },
-  { id: 19, codigo: "A14",       linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer Surfacer Nitro A14", presentacion: "1 lt",                   precio: 84850,  imagen: IMG.A14, descripcion: "Primer surfacer nitro, excelente nivelado. Listo para lijar." },
+  { id: 17, codigo: "PRIMER-GT", linea: "Sprint", categoria: "Primers 4:1", nombre: "Kit Primer GT 4:1",      presentacion: "Kit 1,2 lt (primer + cat.)", precio: 65000, imagen: IMG.PRIMER_4K, descripcion: "Kit primer GT 4:1 listo para usar. Incluye catalizador. Varios colores." },
+  { id: 19, codigo: "A14",       linea: "Sprint", categoria: "Primers 5:1", nombre: "Primer Surfacer Nitro A14", presentacion: "1 lt",                   precio: 84850, imagen: IMG.A14, descripcion: "Primer surfacer nitro, excelente nivelado. Listo para lijar." },
 
   // ══════════════════════════════════════════
   //  MASILLAS
@@ -77,16 +78,16 @@ export const productos: Producto[] = [
   // ══════════════════════════════════════════
   //  SELLADORES
   // ══════════════════════════════════════════
-  { id: 25, codigo: "B320-GR", linea: "Sprint", categoria: "Selladores", nombre: "Sellador Extra Body B320 Gris",       presentacion: "3 lt", precio: 130000, imagen: IMG.GLADIATOR, descripcion: "Sellador Extra Body gris, alta viscosidad y cobertura. Bidón 3 litros." },
-  { id: 26, codigo: "B320-BK", linea: "Sprint", categoria: "Selladores", nombre: "Gladiator Black — Sellador",          presentacion: "1 lt", precio: 46900,  imagen: IMG.GLADIATOR, descripcion: "Sellador Gladiator negro, máxima cobertura y adherencia." },
-  { id: 27, codigo: "B320-TI", linea: "Sprint", categoria: "Selladores", nombre: "Gladiator Tinteable — Sellador",      presentacion: "1 lt", precio: 46900,  imagen: IMG.GLADIATOR, descripcion: "Sellador Gladiator tinteable, adaptable a cualquier fondo." },
+  { id: 25, codigo: "32010", linea: "Sprint", categoria: "Selladores", nombre: "Sellador Extra Body B320 Gris",   presentacion: "1 lt", precio: 46900, imagen: IMG.B320_EXTRABODY, descripcion: "Sellador Extra Body B320 color gris. Alta viscosidad y cobertura." },
+  { id: 26, codigo: "32110", linea: "Sprint", categoria: "Selladores", nombre: "Sellador Extra Body B320 Negro",  presentacion: "1 lt", precio: 46900, imagen: IMG.B320_EXTRABODY, descripcion: "Sellador Extra Body B320 color negro. Alta viscosidad y cobertura." },
+  { id: 27, codigo: "32210", linea: "Sprint", categoria: "Selladores", nombre: "Sellador Extra Body B320 Blanco", presentacion: "1 lt", precio: 46900, imagen: IMG.B320_EXTRABODY, descripcion: "Sellador Extra Body B320 color blanco. Alta viscosidad y cobertura." },
 
   // ══════════════════════════════════════════
   //  ACELERANTES
   // ══════════════════════════════════════════
-  { id: 28, codigo: "SPRINT-AC", linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Sprint",        presentacion: "200 ml", precio: 50200, imagen: IMG.H59, descripcion: "Acelerante Sprint para reducir tiempos de secado de barnices y primers." },
-  { id: 29, codigo: "AC-XRAP",   linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Extra Rápido",  presentacion: "1 lt",   precio: 46900, imagen: IMG.H59, descripcion: "Máxima reducción del tiempo de secado." },
-  { id: 30, codigo: "AC-RAP",    linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Rápido",        presentacion: "1 lt",   precio: 46900, imagen: IMG.H59, descripcion: "Acelerante rápido para pinturas y barnices de secado estándar." },
+  { id: 28, codigo: "V03",      linea: "Sprint", categoria: "Acelerantes", nombre: "V03 Sprint Acelerante",   presentacion: "200 ml", precio: 50200, imagen: IMG.SPRINTER, descripcion: "Acelerante Sprint para reducir tiempos de secado de barnices y primers." },
+  { id: 29, codigo: "AC-XRAP", linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Extra Rápido", presentacion: "1 lt",   precio: 46900, imagen: IMG.SPRINTER, descripcion: "Máxima reducción del tiempo de secado." },
+  { id: 30, codigo: "AC-RAP",  linea: "Sprint", categoria: "Acelerantes", nombre: "Acelerante Rápido",       presentacion: "1 lt",   precio: 46900, imagen: IMG.SPRINTER, descripcion: "Acelerante rápido para pinturas y barnices de secado estándar." },
 
   // ══════════════════════════════════════════
   //  ACCESORIOS
