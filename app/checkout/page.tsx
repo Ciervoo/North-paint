@@ -61,8 +61,7 @@ export default function Checkout() {
       <main className="min-h-screen flex flex-col">
         <header style={{ backgroundColor: "var(--north-blue)" }} className="text-white py-4 px-6 flex items-center shadow-md">
           <Link href="/" className="flex items-center gap-3">
-            <div style={{ backgroundColor: "var(--north-yellow)" }} className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-lg">N</div>
-            <span className="text-xl font-bold tracking-wide">North Paint</span>
+            <img src="/logo.jpg" alt="North Paint" className="h-10 w-auto rounded" />
           </Link>
         </header>
         <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16 gap-4">

@@ -161,9 +161,8 @@ export default function Catalogo() {
   return (
     <main className="min-h-screen flex flex-col bg-gray-50">
       <header style={{ backgroundColor: "var(--north-blue)" }} className="text-white py-4 px-6 flex items-center justify-between shadow-md sticky top-0 z-30">
-        <Link href="/" className="flex items-center gap-3">
-          <div style={{ backgroundColor: "var(--north-yellow)" }} className="w-10 h-10 rounded-full flex items-center justify-center font-black text-white text-lg">N</div>
-          <span className="text-xl font-black">North Paint</span>
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.jpg" alt="North Paint" className="h-10 w-auto rounded" />
         </Link>
         <nav className="flex gap-6 text-sm font-semibold">
           <Link href="/catalogo" className="text-yellow-300">Catálogo</Link>
