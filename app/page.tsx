@@ -137,12 +137,14 @@ export default function Home() {
                 Ver Línea Sprint →
               </Link>
             </motion.div>
-            <motion.div className="flex-1 flex items-center justify-center order-1 md:order-2"
+            <motion.div className="flex-1 flex items-center justify-center order-1 md:order-2 relative"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
               <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
                 alt="Línea Sprint"
-                className="w-48 md:w-64 object-contain drop-shadow-2xl"
-                style={{ mixBlendMode: "multiply", filter: "brightness(1.15) contrast(1.05)" }} />
+                className="w-56 md:w-72 object-contain" />
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "radial-gradient(ellipse at center, transparent 38%, #060e1c 68%)"
+              }} />
             </motion.div>
           </div>
         </div>
@@ -150,12 +152,14 @@ export default function Home() {
         {/* Toro */}
         <div style={{ background: "#1a0505" }} className="px-6 py-12">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
-            <motion.div className="flex-1 flex items-center justify-center order-1"
+            <motion.div className="flex-1 flex items-center justify-center order-1 relative"
               variants={fadeLeft} initial="hidden" whileInView="show" viewport={{ once: true }}>
               <img src="/toro/diluyente.jpg"
                 alt="Línea Toro"
-                className="w-48 md:w-64 object-contain drop-shadow-2xl anim-float"
-                style={{ mixBlendMode: "multiply", filter: "brightness(1.1) contrast(1.05)" }} />
+                className="w-56 md:w-72 object-contain anim-float" />
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "radial-gradient(ellipse at center, transparent 38%, #1a0505 68%)"
+              }} />
             </motion.div>
             <motion.div className="flex-1 text-center md:text-left order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
