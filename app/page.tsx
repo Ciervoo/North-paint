@@ -139,7 +139,7 @@ export default function Home() {
             </motion.div>
             <motion.div className="flex-1 flex items-center justify-center order-1 md:order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <img src="/sprint/sprint-hero-transparent.png"
+              <img src="/sprint/h69-removebg.png"
                 alt="Línea Sprint"
                 className="w-52 md:w-72 object-contain drop-shadow-2xl" />
             </motion.div>
@@ -151,7 +151,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
             <motion.div className="flex-1 flex items-center justify-center order-1"
               variants={fadeLeft} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <img src="/toro/diluyente-transparent.png"
+              <img src="/toro/diluyente-removebg.png"
                 alt="Línea Toro"
                 className="w-52 md:w-72 object-contain drop-shadow-2xl anim-float" />
             </motion.div>
