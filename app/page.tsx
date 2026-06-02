@@ -139,13 +139,9 @@ export default function Home() {
             </motion.div>
             <motion.div className="flex-1 flex items-center justify-center order-1 md:order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <div className="rounded-3xl overflow-hidden" style={{
-                boxShadow: "0 0 50px rgba(245,166,35,0.25), 0 20px 40px rgba(0,0,0,0.4)"
-              }}>
-                <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
-                  alt="Línea Sprint"
-                  className="w-52 md:w-64 object-contain block" />
-              </div>
+              <img src="/sprint/h69-transparent.png"
+                alt="Línea Sprint"
+                className="w-52 md:w-72 object-contain drop-shadow-2xl" />
             </motion.div>
           </div>
         </div>
@@ -155,13 +151,9 @@ export default function Home() {
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
             <motion.div className="flex-1 flex items-center justify-center order-1"
               variants={fadeLeft} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <div className="rounded-3xl overflow-hidden anim-float" style={{
-                boxShadow: "0 0 50px rgba(220,38,38,0.3), 0 20px 40px rgba(0,0,0,0.4)"
-              }}>
-                <img src="/toro/diluyente.jpg"
-                  alt="Línea Toro"
-                  className="w-52 md:w-64 object-contain block" />
-              </div>
+              <img src="/toro/diluyente-transparent.png"
+                alt="Línea Toro"
+                className="w-52 md:w-72 object-contain drop-shadow-2xl anim-float" />
             </motion.div>
             <motion.div className="flex-1 text-center md:text-left order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
