@@ -141,7 +141,8 @@ export default function Home() {
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
               <img src="https://www.icriberica.com/wp-content/uploads/2024/10/H69-5L.jpg"
                 alt="Línea Sprint"
-                className="w-48 md:w-64 object-contain opacity-90 drop-shadow-2xl" />
+                className="w-48 md:w-64 object-contain drop-shadow-2xl"
+                style={{ mixBlendMode: "multiply", filter: "brightness(1.15) contrast(1.05)" }} />
             </motion.div>
           </div>
         </div>
@@ -153,7 +154,8 @@ export default function Home() {
               variants={fadeLeft} initial="hidden" whileInView="show" viewport={{ once: true }}>
               <img src="/toro/diluyente.jpg"
                 alt="Línea Toro"
-                className="w-48 md:w-64 object-contain opacity-90 drop-shadow-2xl anim-float" />
+                className="w-48 md:w-64 object-contain drop-shadow-2xl anim-float"
+                style={{ mixBlendMode: "multiply", filter: "brightness(1.1) contrast(1.05)" }} />
             </motion.div>
             <motion.div className="flex-1 text-center md:text-left order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
