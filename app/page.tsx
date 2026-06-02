@@ -139,7 +139,7 @@ export default function Home() {
             </motion.div>
             <motion.div className="flex-1 flex items-center justify-center order-1 md:order-2"
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <img src="/sprint/h69-transparent.png"
+              <img src="/sprint/sprint-hero-transparent.png"
                 alt="Línea Sprint"
                 className="w-52 md:w-72 object-contain drop-shadow-2xl" />
             </motion.div>
