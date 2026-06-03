@@ -49,6 +49,14 @@ export default function Checkout() {
 
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+
+      // Registrar venta en Sprint (fire-and-forget: no bloquea si falla)
+      fetch("/api/pedido", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ form, items }),
+      }).catch((err) => console.error("[sprint] Error al registrar pedido:", err));
+
       setEstado("ok");
       vaciarCarrito();
     } catch {
