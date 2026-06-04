@@ -157,6 +157,26 @@ function CatalogoContent() {
                 )}
               </div>
 
+              {p.fichaTecnica && (
+                <a
+                  href={p.fichaTecnica}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg text-xs font-semibold border transition-colors"
+                  style={{ borderColor: "var(--north-blue)", color: "var(--north-blue)" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "var(--north-blue)";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "white";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--north-blue)";
+                  }}
+                >
+                  📄 Ficha técnica
+                </a>
+              )}
               <AgregarCarritoBtn producto={p} />
             </div>
           </motion.div>
