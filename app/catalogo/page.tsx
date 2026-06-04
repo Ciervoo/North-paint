@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { motion, type Variants } from "framer-motion";
-import { productos, categoriasSprint } from "../data/productos";
+import { productos, categoriasSprint, type Producto } from "../data/productos";
 import AgregarCarritoBtn from "../components/AgregarCarritoBtn";
+import FichaTecnicaModal from "../components/FichaTecnicaModal";
 
 const stagger: Variants = { show: { transition: { staggerChildren: 0.07 } } };
 const cardAnim: Variants = {
@@ -24,6 +25,7 @@ function CatalogoContent() {
   );
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
   const [busqueda, setBusqueda] = useState("");
+  const [fichaActiva, setFichaActiva] = useState<Producto | null>(null);
 
   useEffect(() => {
     if (lineaParam === "Toro") setLineaActiva("Toro");
@@ -157,26 +159,21 @@ function CatalogoContent() {
                 )}
               </div>
 
-              {p.fichaTecnica && (
-                <a
-                  href={p.fichaTecnica}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg text-xs font-semibold border transition-colors"
-                  style={{ borderColor: "var(--north-blue)", color: "var(--north-blue)" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "var(--north-blue)";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "white";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--north-blue)";
-                  }}
-                >
-                  📄 Ficha técnica
-                </a>
-              )}
+              <button
+                onClick={(e) => { e.stopPropagation(); setFichaActiva(p); }}
+                className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg text-xs font-semibold border transition-colors"
+                style={{ borderColor: "var(--north-blue)", color: "var(--north-blue)", background: "transparent" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "var(--north-blue)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "white";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent";
+                  (e.currentTarget as HTMLButtonElement).style.color = "var(--north-blue)";
+                }}
+              >
+                📄 Ficha técnica
+              </button>
               <AgregarCarritoBtn producto={p} />
             </div>
           </motion.div>
@@ -185,6 +182,10 @@ function CatalogoContent() {
 
       {productosFiltrados.length === 0 && (
         <div className="text-center text-gray-400 py-16 text-lg">No se encontraron productos.</div>
+      )}
+
+      {fichaActiva && (
+        <FichaTecnicaModal producto={fichaActiva} onClose={() => setFichaActiva(null)} />
       )}
     </div>
   );
