@@ -52,14 +52,22 @@ function esLunes() {
   return d === "Monday";
 }
 
-async function sendWhatsApp(mensaje: string) {
-  const phone = process.env.CALLMEBOT_PHONE!;
-  const apikey = process.env.CALLMEBOT_APIKEY!;
-  if (!phone || !apikey) throw new Error("CALLMEBOT_PHONE o CALLMEBOT_APIKEY no configurados");
-  const texto = encodeURIComponent(mensaje);
-  const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${texto}&apikey=${apikey}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("CallMeBot error: " + res.status);
+async function sendEmail(subject: string, message: string) {
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      template_id: process.env.EMAILJS_TEMPLATE_ALERTAS,
+      user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+      template_params: {
+        to_email: "distribuidoranorthpaint@gmail.com",
+        subject,
+        message,
+      },
+    }),
+  });
+  if (!res.ok) throw new Error("EmailJS error: " + res.status + " " + await res.text());
 }
 
 export async function GET(req: Request) {
@@ -111,40 +119,52 @@ export async function GET(req: Request) {
     // ── 5. Armar mensaje ─────────────────────────────────────────
     const partes: string[] = [];
 
-    partes.push(`🎨 *North Paint — ${hoyArgentina()}*`);
+    partes.push(`North Paint — ${hoyArgentina()}\n`);
 
     // Stock bajo
     if (stockBajo.length > 0) {
-      partes.push(`\n📦 *STOCK BAJO*`);
+      partes.push(`📦 STOCK BAJO`);
       stockBajo.forEach(p => {
         const emoji = p.cant === 0 ? "🔴" : "🟡";
-        partes.push(`${emoji} ${p.nombre}: ${p.cant === 0 ? "SIN STOCK" : p.cant + " unid."}`);
+        partes.push(`  ${emoji} ${p.nombre}: ${p.cant === 0 ? "SIN STOCK" : p.cant + " unid."}`);
       });
+      partes.push("");
     }
 
-    // Cobros pendientes (solo si hay deuda significativa)
+    // Cobros pendientes
     if (totalDeuda > 0) {
-      partes.push(`\n💰 *COBROS PENDIENTES* (${fmt(totalDeuda)} total)`);
+      partes.push(`💰 COBROS PENDIENTES — ${fmt(totalDeuda)} total`);
       conDeuda.forEach((c: { nombre: string; deuda: number }) => {
-        partes.push(`• ${c.nombre}: ${fmt(c.deuda)}`);
+        partes.push(`  • ${c.nombre}: ${fmt(c.deuda)}`);
       });
-      if (conDeuda.length < (clientes || []).filter((c: { deuda: number }) => Number(c.deuda) > 0).length) {
-        partes.push(`  _(y otros más)_`);
-      }
+      const totalConDeuda = (clientes || []).filter((c: { deuda: number }) => Number(c.deuda) > 0).length;
+      if (conDeuda.length < totalConDeuda) partes.push(`  (y ${totalConDeuda - conDeuda.length} más)`);
+      partes.push("");
     }
 
     // Ventas del mes
-    partes.push(`\n📈 *Mes actual*`);
-    partes.push(`Ventas: ${fmt(totalVentasMes)}`);
-    partes.push(`Ganancia: ${fmt(gananciasMes)} (${margenMes}%)`);
-    if (ventasHoy > 0) partes.push(`Hoy: ${ventasHoy} venta${ventasHoy > 1 ? "s" : ""}`);
+    partes.push(`📈 MES ACTUAL`);
+    partes.push(`  Ventas:   ${fmt(totalVentasMes)}`);
+    partes.push(`  Ganancia: ${fmt(gananciasMes)} (${margenMes}%)`);
+    if (ventasHoy > 0) partes.push(`  Hoy: ${ventasHoy} venta${ventasHoy > 1 ? "s" : ""}`);
 
     // Resumen semanal (lunes)
-    if (resumenSemanal) partes.push(resumenSemanal);
-
-    partes.push(`\n_Sprint App — North Paint_`);
+    if (resumenSemanal) {
+      partes.push("");
+      partes.push(resumenSemanal);
+    }
 
     const mensaje = partes.join("\n");
+
+    // Asunto dinámico
+    const alertas = [];
+    if (stockBajo.some(p => p.cant === 0)) alertas.push("sin stock");
+    else if (stockBajo.length > 0) alertas.push("stock bajo");
+    if (totalDeuda > 0) alertas.push("cobros pendientes");
+    if (esLunes()) alertas.push("resumen semanal");
+    const subject = alertas.length > 0
+      ? `⚠️ North Paint — ${alertas.join(" · ")}`
+      : `North Paint — Reporte diario`;
 
     // Si no hay nada urgente y no es lunes, no mandar
     const hayAlgo = stockBajo.length > 0 || totalDeuda > 0 || esLunes();
@@ -152,9 +172,9 @@ export async function GET(req: Request) {
       return NextResponse.json({ ok: true, skipped: true, reason: "Nada urgente hoy" });
     }
 
-    await sendWhatsApp(mensaje);
+    await sendEmail(subject, mensaje);
 
-    return NextResponse.json({ ok: true, mensaje });
+    return NextResponse.json({ ok: true, subject, mensaje });
   } catch (e) {
     console.error("[alertas]", e);
     return NextResponse.json({ error: String(e) }, { status: 500 });
