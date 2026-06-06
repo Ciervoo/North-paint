@@ -106,7 +106,11 @@ export async function GET(req: Request) {
       .slice(0, 5);
     const totalDeuda = (clientes || []).reduce((a: number, c: { deuda: number }) => a + Number(c.deuda), 0);
 
-    // ── 4. Ventas de la semana (si es lunes) ─────────────────────
+    // ── 4. Visitas programadas para hoy ─────────────────────────
+    const { data: visitasProg } = await sb.from("visitas_programadas").select("*").eq("fecha", hoy);
+    const visitasHoyProg = visitasProg || [];
+
+    // ── 5. Ventas de la semana (si es lunes) ─────────────────────
     let resumenSemanal = "";
     if (esLunes()) {
       const hace7 = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
@@ -142,6 +146,16 @@ export async function GET(req: Request) {
       partes.push("");
     }
 
+    // Visitas programadas hoy
+    if (visitasHoyProg.length > 0) {
+      partes.push(`📅 VISITAS DE HOY`);
+      visitasHoyProg.forEach((v: { nombre_taller: string; dueno: string; vendedor: string; notas: string }) => {
+        partes.push(`  • ${v.nombre_taller}${v.dueno ? ' (' + v.dueno + ')' : ''} — ${v.vendedor}`);
+        if (v.notas) partes.push(`    ${v.notas}`);
+      });
+      partes.push("");
+    }
+
     // Ventas del mes
     partes.push(`📈 MES ACTUAL`);
     partes.push(`  Ventas:   ${fmt(totalVentasMes)}`);
@@ -162,12 +176,13 @@ export async function GET(req: Request) {
     else if (stockBajo.length > 0) alertas.push("stock bajo");
     if (totalDeuda > 0) alertas.push("cobros pendientes");
     if (esLunes()) alertas.push("resumen semanal");
+    if (visitasHoyProg.length > 0) alertas.push(`${visitasHoyProg.length} visita${visitasHoyProg.length > 1 ? "s" : ""} hoy`);
     const subject = alertas.length > 0
       ? `⚠️ North Paint — ${alertas.join(" · ")}`
       : `North Paint — Reporte diario`;
 
     // Si no hay nada urgente y no es lunes, no mandar
-    const hayAlgo = stockBajo.length > 0 || totalDeuda > 0 || esLunes();
+    const hayAlgo = stockBajo.length > 0 || totalDeuda > 0 || esLunes() || visitasHoyProg.length > 0;
     if (!hayAlgo) {
       return NextResponse.json({ ok: true, skipped: true, reason: "Nada urgente hoy" });
     }
