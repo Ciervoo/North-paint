@@ -87,8 +87,12 @@ export async function GET(req: Request) {
     const stock: Record<string, number> = {};
     (stockRows || []).forEach((r: { pid: string; cantidad: number }) => { stock[r.pid] = Number(r.cantidad); });
 
+    // Solo alertar productos que alguna vez fueron comprados
+    const { data: comprasRows } = await sb.from("compras").select("pid");
+    const pidsConActividad = new Set((comprasRows || []).map((c: { pid: string }) => c.pid));
+
     const stockBajo = Object.entries(STOCK_MINIMO)
-      .filter(([pid, min]) => (stock[pid] ?? 0) <= min)
+      .filter(([pid, min]) => pidsConActividad.has(pid) && (stock[pid] ?? 0) <= min)
       .map(([pid]) => ({ pid, nombre: NOMBRES[pid] || pid, cant: stock[pid] ?? 0 }));
 
     // ── 2. Ventas del mes ────────────────────────────────────────
