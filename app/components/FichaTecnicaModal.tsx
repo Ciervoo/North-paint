@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { Producto } from "../data/productos";
+import { track } from "../lib/track";
 
 function formatMin(min: number): string {
   if (min < 60) return `${min} min`;
@@ -24,6 +25,11 @@ export default function FichaTecnicaModal({
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
+
+  // Track product view
+  useEffect(() => {
+    track("product_view", { producto: producto.nombre });
+  }, [producto.nombre]);
 
   // Bloquear scroll del body mientras el modal está abierto
   useEffect(() => {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { Producto } from "../data/productos";
+import { track } from "../lib/track";
 
 export default function AgregarCarritoBtn({ producto }: { producto: Producto }) {
   const { agregarAlCarrito } = useCart();
@@ -10,6 +11,7 @@ export default function AgregarCarritoBtn({ producto }: { producto: Producto }) 
 
   const handleClick = () => {
     agregarAlCarrito(producto);
+    track("add_to_cart", { producto: producto.nombre });
     setAgregado(true);
     setTimeout(() => setAgregado(false), 1500);
   };

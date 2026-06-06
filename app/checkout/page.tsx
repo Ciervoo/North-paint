@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import emailjs from "@emailjs/browser";
+import { track } from "../lib/track";
 
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
@@ -21,6 +22,8 @@ export default function Checkout() {
     notas: "",
   });
   const [estado, setEstado] = useState<"idle" | "enviando" | "ok" | "error">("idle");
+
+  useEffect(() => { track("checkout_start"); }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,6 +60,7 @@ export default function Checkout() {
         body: JSON.stringify({ form, items }),
       }).catch((err) => console.error("[sprint] Error al registrar pedido:", err));
 
+      track("checkout_complete");
       setEstado("ok");
       vaciarCarrito();
     } catch {
