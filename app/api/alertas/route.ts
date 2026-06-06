@@ -107,8 +107,9 @@ export async function GET(req: Request) {
       .slice(0, 5);
     const totalDeuda = (clientes || []).reduce((a: number, c: { deuda: number }) => a + Number(c.deuda), 0);
 
-    // ── 4. Visitas programadas para hoy ─────────────────────────
-    const { data: visitasProg } = await sb.from("visitas_programadas").select("*").eq("fecha", hoy);
+    // ── 4. Visitas programadas (hoy + próximos 7 días) ───────────
+    const en7dias = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+    const { data: visitasProg } = await sb.from("visitas_programadas").select("*").gte("fecha", hoy).lte("fecha", en7dias).order("fecha", { ascending: true });
     const visitasHoyProg = visitasProg || [];
 
     // ── 5. Ventas de la semana (si es lunes) ─────────────────────
@@ -147,11 +148,15 @@ export async function GET(req: Request) {
       partes.push("");
     }
 
-    // Visitas programadas hoy
+    // Visitas programadas
     if (visitasHoyProg.length > 0) {
-      partes.push(`📅 VISITAS DE HOY`);
-      visitasHoyProg.forEach((v: { nombre_taller: string; dueno: string; vendedor: string; notas: string }) => {
-        partes.push(`  • ${v.nombre_taller}${v.dueno ? ' (' + v.dueno + ')' : ''} — ${v.vendedor}`);
+      partes.push(`📅 VISITAS PROGRAMADAS`);
+      visitasHoyProg.forEach((v: { nombre_taller: string; dueno: string; vendedor: string; notas: string; fecha: string }) => {
+        const esHoy = v.fecha === hoy;
+        const [y, m, d] = v.fecha.split("-");
+        const meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+        const fechaLabel = esHoy ? "HOY" : `${d} ${meses[parseInt(m)-1]}`;
+        partes.push(`  ${esHoy ? "🔔" : "📌"} ${fechaLabel} — ${v.nombre_taller}${v.dueno ? ' (' + v.dueno + ')' : ''} · ${v.vendedor}`);
         if (v.notas) partes.push(`    ${v.notas}`);
       });
       partes.push("");
