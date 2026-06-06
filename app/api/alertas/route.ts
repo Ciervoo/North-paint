@@ -82,20 +82,7 @@ export async function GET(req: Request) {
     const hoy = new Date().toISOString().slice(0, 10);
     const mes = mesActual();
 
-    // ── 1. Stock actual ──────────────────────────────────────────
-    const { data: stockRows } = await sb.from("stock").select("*");
-    const stock: Record<string, number> = {};
-    (stockRows || []).forEach((r: { pid: string; cantidad: number }) => { stock[r.pid] = Number(r.cantidad); });
-
-    // Solo alertar productos que alguna vez fueron comprados
-    const { data: comprasRows } = await sb.from("compras").select("pid");
-    const pidsConActividad = new Set((comprasRows || []).map((c: { pid: string }) => c.pid));
-
-    const stockBajo = Object.entries(STOCK_MINIMO)
-      .filter(([pid, min]) => pidsConActividad.has(pid) && (stock[pid] ?? 0) <= min)
-      .map(([pid]) => ({ pid, nombre: NOMBRES[pid] || pid, cant: stock[pid] ?? 0 }));
-
-    // ── 2. Ventas del mes ────────────────────────────────────────
+    // ── 1. Ventas (mes + pendientes de entrega) ──────────────────
     const { data: ventas } = await sb.from("ventas").select("*");
     const ventasMes = (ventas || []).filter((v: { fecha: string }) => v.fecha?.startsWith(mes));
     const totalVentasMes = ventasMes.reduce((a: number, v: { total: number }) => a + Number(v.total), 0);
@@ -103,62 +90,79 @@ export async function GET(req: Request) {
     const margenMes = totalVentasMes > 0 ? Math.round(gananciasMes / totalVentasMes * 100) : 0;
     const ventasHoy = ventasMes.filter((v: { fecha: string }) => v.fecha === hoy).length;
 
-    // ── 3. Cobros pendientes ─────────────────────────────────────
+    // ── 2. Clientes ──────────────────────────────────────────────
     const { data: clientes } = await sb.from("clientes").select("id, nombre, deuda");
+    const mapaClientes: Record<number, string> = {};
+    (clientes || []).forEach((c: { id: number; nombre: string }) => { mapaClientes[c.id] = c.nombre; });
+
+    // Todos los deudores, ordenados por deuda
     const conDeuda = (clientes || [])
       .filter((c: { deuda: number }) => Number(c.deuda) > 0)
-      .sort((a: { deuda: number }, b: { deuda: number }) => Number(b.deuda) - Number(a.deuda))
-      .slice(0, 5);
-    const totalDeuda = (clientes || []).reduce((a: number, c: { deuda: number }) => a + Number(c.deuda), 0);
+      .sort((a: { deuda: number }, b: { deuda: number }) => Number(b.deuda) - Number(a.deuda));
+    const totalDeuda = conDeuda.reduce((a: number, c: { deuda: number }) => a + Number(c.deuda), 0);
+
+    // ── 3. Mercadería a entregar ─────────────────────────────────
+    type Venta = { cid: number; pid: string; cant: number; total: number; fecha: string; notas: string; entregado: boolean };
+    const pendientes = (ventas || []).filter((v: Venta) => v.entregado === false);
+
+    // Agrupar por cliente
+    const porCliente: Record<number, { items: { pid: string; cant: number; total: number }[]; fecha: string }> = {};
+    pendientes.forEach((v: Venta) => {
+      if (!porCliente[v.cid]) porCliente[v.cid] = { items: [], fecha: v.fecha };
+      porCliente[v.cid].items.push({ pid: v.pid, cant: v.cant, total: v.total });
+      if (v.fecha > porCliente[v.cid].fecha) porCliente[v.cid].fecha = v.fecha;
+    });
 
     // ── 4. Visitas programadas (hoy + próximos 7 días) ───────────
     const en7dias = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
     const { data: visitasProg } = await sb.from("visitas_programadas").select("*").gte("fecha", hoy).lte("fecha", en7dias).order("fecha", { ascending: true });
     const visitasHoyProg = visitasProg || [];
 
-    // ── 5. Ventas de la semana (si es lunes) ─────────────────────
+    // ── 5. Resumen semanal (lunes) ───────────────────────────────
     let resumenSemanal = "";
     if (esLunes()) {
       const hace7 = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
       const ventasSemana = (ventas || []).filter((v: { fecha: string }) => v.fecha >= hace7 && v.fecha < hoy);
       const tvSem = ventasSemana.reduce((a: number, v: { total: number }) => a + Number(v.total), 0);
       const tgSem = ventasSemana.reduce((a: number, v: { total: number; costo: number }) => a + (Number(v.total) - Number(v.costo)), 0);
-      resumenSemanal = `\n📊 *Resumen semana anterior*\nVentas: ${fmt(tvSem)}\nGanancia: ${fmt(tgSem)} (${tvSem > 0 ? Math.round(tgSem / tvSem * 100) : 0}%)\nPedidos: ${ventasSemana.length}\n`;
+      resumenSemanal = `📊 SEMANA ANTERIOR\n  Ventas:   ${fmt(tvSem)}\n  Ganancia: ${fmt(tgSem)} (${tvSem > 0 ? Math.round(tgSem / tvSem * 100) : 0}%)\n  Pedidos:  ${ventasSemana.length}`;
     }
 
-    // ── 5. Armar mensaje ─────────────────────────────────────────
+    // ── 6. Armar mensaje ─────────────────────────────────────────
     const partes: string[] = [];
-
     partes.push(`North Paint — ${hoyArgentina()}\n`);
 
-    // Stock bajo
-    if (stockBajo.length > 0) {
-      partes.push(`📦 STOCK BAJO`);
-      stockBajo.forEach(p => {
-        const emoji = p.cant === 0 ? "🔴" : "🟡";
-        partes.push(`  ${emoji} ${p.nombre}: ${p.cant === 0 ? "SIN STOCK" : p.cant + " unid."}`);
-      });
+    // Mercadería a entregar
+    const clientesPendientes = Object.entries(porCliente);
+    if (clientesPendientes.length > 0) {
+      partes.push(`📦 MERCADERÍA A ENTREGAR (${pendientes.length} item${pendientes.length > 1 ? "s" : ""})`);
+      clientesPendientes
+        .sort(([,a],[,b]) => b.fecha.localeCompare(a.fecha))
+        .forEach(([cid, data]) => {
+          const nombre = mapaClientes[Number(cid)] || `Cliente #${cid}`;
+          const productos = data.items.map(i => `${NOMBRES[i.pid] || i.pid} x${i.cant}`).join(", ");
+          const subtotal = data.items.reduce((a, i) => a + Number(i.total), 0);
+          partes.push(`  • ${nombre}: ${productos}  (${fmt(subtotal)})`);
+        });
       partes.push("");
     }
 
-    // Cobros pendientes
+    // Cobros pendientes — TODOS
     if (totalDeuda > 0) {
       partes.push(`💰 COBROS PENDIENTES — ${fmt(totalDeuda)} total`);
       conDeuda.forEach((c: { nombre: string; deuda: number }) => {
         partes.push(`  • ${c.nombre}: ${fmt(c.deuda)}`);
       });
-      const totalConDeuda = (clientes || []).filter((c: { deuda: number }) => Number(c.deuda) > 0).length;
-      if (conDeuda.length < totalConDeuda) partes.push(`  (y ${totalConDeuda - conDeuda.length} más)`);
       partes.push("");
     }
 
     // Visitas programadas
     if (visitasHoyProg.length > 0) {
       partes.push(`📅 VISITAS PROGRAMADAS`);
+      const meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
       visitasHoyProg.forEach((v: { nombre_taller: string; dueno: string; vendedor: string; notas: string; fecha: string }) => {
         const esHoy = v.fecha === hoy;
-        const [y, m, d] = v.fecha.split("-");
-        const meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+        const [, m, d] = v.fecha.split("-");
         const fechaLabel = esHoy ? "HOY" : `${d} ${meses[parseInt(m)-1]}`;
         partes.push(`  ${esHoy ? "🔔" : "📌"} ${fechaLabel} — ${v.nombre_taller}${v.dueno ? ' (' + v.dueno + ')' : ''} · ${v.vendedor}`);
         if (v.notas) partes.push(`    ${v.notas}`);
@@ -173,32 +177,26 @@ export async function GET(req: Request) {
     if (ventasHoy > 0) partes.push(`  Hoy: ${ventasHoy} venta${ventasHoy > 1 ? "s" : ""}`);
 
     // Resumen semanal (lunes)
-    if (resumenSemanal) {
-      partes.push("");
-      partes.push(resumenSemanal);
-    }
+    if (resumenSemanal) { partes.push(""); partes.push(resumenSemanal); }
 
     const mensaje = partes.join("\n");
 
     // Asunto dinámico
-    const alertas = [];
-    if (stockBajo.some(p => p.cant === 0)) alertas.push("sin stock");
-    else if (stockBajo.length > 0) alertas.push("stock bajo");
-    if (totalDeuda > 0) alertas.push("cobros pendientes");
-    if (esLunes()) alertas.push("resumen semanal");
-    if (visitasHoyProg.length > 0) alertas.push(`${visitasHoyProg.length} visita${visitasHoyProg.length > 1 ? "s" : ""} hoy`);
-    const subject = alertas.length > 0
-      ? `⚠️ North Paint — ${alertas.join(" · ")}`
+    const tags = [];
+    if (clientesPendientes.length > 0) tags.push(`${clientesPendientes.length} entregas`);
+    if (totalDeuda > 0) tags.push("cobros pendientes");
+    if (visitasHoyProg.some((v: { fecha: string }) => v.fecha === hoy)) tags.push("visitas hoy");
+    if (esLunes()) tags.push("resumen semanal");
+    const subject = tags.length > 0
+      ? `⚠️ North Paint — ${tags.join(" · ")}`
       : `North Paint — Reporte diario`;
 
-    // Si no hay nada urgente y no es lunes, no mandar
-    const hayAlgo = stockBajo.length > 0 || totalDeuda > 0 || esLunes() || visitasHoyProg.length > 0;
+    const hayAlgo = clientesPendientes.length > 0 || totalDeuda > 0 || esLunes() || visitasHoyProg.length > 0;
     if (!hayAlgo) {
       return NextResponse.json({ ok: true, skipped: true, reason: "Nada urgente hoy" });
     }
 
     await sendEmail(subject, mensaje);
-
     return NextResponse.json({ ok: true, subject, mensaje });
   } catch (e) {
     console.error("[alertas]", e);
