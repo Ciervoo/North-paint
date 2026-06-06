@@ -60,6 +60,7 @@ async function sendEmail(subject: string, message: string) {
       service_id: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
       template_id: process.env.EMAILJS_TEMPLATE_ALERTAS,
       user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+      accessToken: process.env.EMAILJS_PRIVATE_KEY,
       template_params: {
         to_email: "distribuidoranorthpaint@gmail.com",
         subject,
