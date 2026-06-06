@@ -92,8 +92,8 @@ export async function GET(req: Request) {
 
     // ── 2. Clientes ──────────────────────────────────────────────
     const { data: clientes } = await sb.from("clientes").select("id, nombre, deuda");
-    const mapaClientes: Record<number, string> = {};
-    (clientes || []).forEach((c: { id: number; nombre: string }) => { mapaClientes[c.id] = c.nombre; });
+    const mapaClientes: Record<string, string> = {};
+    (clientes || []).forEach((c: { id: string; nombre: string }) => { mapaClientes[String(c.id)] = c.nombre; });
 
     // Todos los deudores, ordenados por deuda
     const conDeuda = (clientes || [])
@@ -106,11 +106,12 @@ export async function GET(req: Request) {
     const pendientes = (ventas || []).filter((v: Venta) => v.entregado === false);
 
     // Agrupar por cliente
-    const porCliente: Record<number, { items: { pid: string; cant: number; total: number }[]; fecha: string }> = {};
+    const porCliente: Record<string, { items: { pid: string; cant: number; total: number }[]; fecha: string }> = {};
     pendientes.forEach((v: Venta) => {
-      if (!porCliente[v.cid]) porCliente[v.cid] = { items: [], fecha: v.fecha };
-      porCliente[v.cid].items.push({ pid: v.pid, cant: v.cant, total: v.total });
-      if (v.fecha > porCliente[v.cid].fecha) porCliente[v.cid].fecha = v.fecha;
+      const key = String(v.cid);
+      if (!porCliente[key]) porCliente[key] = { items: [], fecha: v.fecha };
+      porCliente[key].items.push({ pid: v.pid, cant: v.cant, total: v.total });
+      if (v.fecha > porCliente[key].fecha) porCliente[key].fecha = v.fecha;
     });
 
     // ── 4. Visitas programadas (hoy + próximos 7 días) ───────────
@@ -139,7 +140,7 @@ export async function GET(req: Request) {
       clientesPendientes
         .sort(([,a],[,b]) => b.fecha.localeCompare(a.fecha))
         .forEach(([cid, data]) => {
-          const nombre = mapaClientes[Number(cid)] || `Cliente #${cid}`;
+          const nombre = mapaClientes[cid] || `Cliente #${cid}`;
           const productos = data.items.map(i => `${NOMBRES[i.pid] || i.pid} x${i.cant}`).join(", ");
           const subtotal = data.items.reduce((a, i) => a + Number(i.total), 0);
           partes.push(`  • ${nombre}: ${productos}  (${fmt(subtotal)})`);
